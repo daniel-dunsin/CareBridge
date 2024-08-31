@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground: #000;
+  --background: #fff;
+}
+
+input,
+textarea,
+a,
+button {
+  outline: none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--foreground);
+  background-color: var(--background);
+  transition:
+    color 0.2s,
+    background-color 0.2s;
+  overflow-x: hidden;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cecece;
+  border-radius: 8px;
+  height: 40px;
+}
+
+.hide-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.show-scroll::-webkit-scrollbar {
+  display: block;
+}
+
+.pulse {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  background-color: #fff;
+  border-radius: 50%;
+  transform: scale(0) translateX(-50%) translateY(-50%);
+  animation: pulse 0.5s ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
