@@ -6,6 +6,11 @@ export const jarkata = localFont({
 });
 
 export const karla = localFont({
-  src: "../fonts/Karla-Italic-VariableFont_wght.ttf",
+  src: "../fonts/PlusJakartaSans-VariableFont_wght.ttf",
+  display: "swap",
+});
+
+export const dmSans = localFont({
+  src: "../fonts/DMSans-VariableFont_opsz,wght.ttf",
   display: "swap",
 });

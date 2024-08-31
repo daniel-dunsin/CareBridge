@@ -12,10 +12,13 @@ const config: Config = {
       center: true,
       padding: "1rem",
     },
-    colors: {
-      secondary: "",
-      primary: "#adf506",
-      offWhite: "#f6f6f6",
+    extend: {
+      colors: {
+        secondary: "",
+        primary: "#adf506",
+        offWhite: "#f6f6f6",
+        lightShade: "#f2fdd2",
+      },
     },
   },
   plugins: [],
