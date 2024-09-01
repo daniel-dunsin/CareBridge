@@ -16,8 +16,9 @@ const config: Config = {
       colors: {
         secondary: "",
         primary: "#adf506",
-        offWhite: "#f6f6f6",
+        offWhite: "#fafafa",
         lightShade: "#f2fdd2",
+        dark: "#212121",
       },
     },
   },
