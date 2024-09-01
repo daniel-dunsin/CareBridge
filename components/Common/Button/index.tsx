@@ -20,7 +20,7 @@ const Button: FC<Props> = (props) => {
     onClick,
     icon,
     className: extraClass = "",
-    variant = "faint",
+    variant = "filled",
     children,
     size = "extra-small",
     disabled = false,
