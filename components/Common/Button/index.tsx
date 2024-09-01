@@ -54,7 +54,7 @@ const Button: FC<Props> = (props) => {
       break;
 
     case "black":
-      mainClass += "hover:bg-primary/80 bg-primary text-primary ";
+      mainClass += "hover:bg-black/90 bg-black text-white ";
       break;
 
     default:
@@ -66,7 +66,7 @@ const Button: FC<Props> = (props) => {
       mainClass += "px-5 py-2 text-xs ";
       break;
     case "small":
-      mainClass += "px-6 py-[6px] text-[14px] ";
+      mainClass += "px-6 py-[10px] text-[14px] ";
       break;
     case "medium":
       mainClass += "px-6 py-3 ";

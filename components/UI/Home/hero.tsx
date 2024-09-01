@@ -32,9 +32,13 @@ const Hero = () => {
               <span className="text-primary">.</span>
             </p>
 
+            <p className="leading-relaxed text-gray-500 max-w-xl">
+              CareBridge bridges the gap between medical services and AI integration, enhancing healthcare delivery.
+            </p>
+
             <div className="w-fit">
               <Link href={"/account/register"}>
-                <Button icon={<LuChevronRight />} variant="filled" size="medium">
+                <Button icon={<LuChevronRight />} variant="black" size="medium">
                   Get Started
                 </Button>
               </Link>
