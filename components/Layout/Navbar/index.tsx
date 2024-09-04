@@ -1,8 +1,11 @@
 "use client";
 import Button from "@/components/Common/Button";
+import ThreeDotsLoader from "@/components/Common/Loaders/three-dots";
+import ThemeToggle from "@/components/Common/Others/theme-toggle";
 import navLinks from "@/lib/data/navbar";
 import { useTheme } from "@/lib/store/global.store";
 import { dmSans } from "@/lib/utils/fonts";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { BiHealth } from "react-icons/bi";
@@ -12,7 +15,7 @@ const Navbar = () => {
 
   const asideRef = useRef<HTMLElement>(null);
 
-  // const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
   const [passed, setPassed] = useState(false);
 
@@ -54,19 +57,19 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`bg-white duration-300 ${dmSans.className} fixed top-0 left-0 w-full z-[1000] ${
-        passed ? "opacity-0" : "opacity-100"
-      }`}
+      className={`bg-white dark:bg-transparent duration-300 backdrop-blur-md ${
+        dmSans.className
+      } fixed top-0 left-0 w-full z-50 ${passed ? "opacity-0" : "opacity-100"}`}
       ref={ref}
     >
       <div className="container flex items-center justify-between py-4">
         <div className="flex items-center gap-16">
-          <div className="flex items-center gap-1 text-black">
+          <div className="flex items-center gap-1 text-black dark:text-offWhite">
             <BiHealth size={20} className="text-primary" />
             <span className="font-bold text-lg">CareBridge</span>
           </div>
 
-          <ul className="flex items-center gap-8 font-semibold text-xs uppercase">
+          <ul className="sm:flex hidden items-center md:gap-8 sm:gap-4 font-semibold text-xs uppercase">
             {navLinks.map(({ href, label }, index) => (
               <li key={index} className="tracking-[0.15rem]">
                 <Link href={href}>{label}</Link>
@@ -75,22 +78,36 @@ const Navbar = () => {
           </ul>
         </div>
 
-        <div className="flex items-center gap-2">
-          <div>
-            <Link href="/account/register">
-              <Button className="uppercase" variant="faint">
-                Get Started
-              </Button>
-            </Link>
-          </div>
-
-          <div>
-            <Link href="/account/login">
-              <Button className="uppercase" variant="filled">
-                Login
-              </Button>
-            </Link>
-          </div>
+        <div className="flex items-center md:gap-3 gap-2">
+          <ThemeToggle />
+          {status === "loading" && !session ? (
+            <ThreeDotsLoader />
+          ) : (
+            <>
+              {status === "authenticated" && session ? (
+                <div>
+                  <Link href="/dashbaord">
+                    <Button className="uppercase">Dashboard</Button>
+                  </Link>
+                </div>
+              ) : (
+                <>
+                  <div>
+                    <Link href="/account/register">
+                      <Button className="uppercase" variant="faint">
+                        Get Started
+                      </Button>
+                    </Link>
+                  </div>
+                  <div>
+                    <Link href="/account/login">
+                      <Button className="uppercase">Login</Button>
+                    </Link>
+                  </div>
+                </>
+              )}
+            </>
+          )}
 
           {/* <button className="px-8 py-2 rounded-full bg-gradient-to-b from-blue-500 to-blue-600 text-white focus:ring-2 focus:ring-blue-400 hover:shadow-xl transition duration-200">
             Login

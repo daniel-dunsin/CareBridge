@@ -19,6 +19,7 @@ const config: Config = {
         offWhite: "#fafafa",
         lightShade: "#f2fdd2",
         dark: "#212121",
+        darkGray: "#272727",
       },
     },
   },

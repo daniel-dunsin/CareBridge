@@ -13,7 +13,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
       <div className="text-black fixed top-3 right-6">
         <Link href="/" className="flex items-center gap-1">
           <BiHealth size={20} className="text-primary" />
-          <span className="font-bold text-lg">CareBridge</span>
+          <span className="font-bold text-lg dark:text-white">CareBridge</span>
         </Link>
       </div>
 

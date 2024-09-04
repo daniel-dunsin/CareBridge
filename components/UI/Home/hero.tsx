@@ -12,17 +12,15 @@ const Hero = () => {
 
   useGSAP(
     () => {
-      gsap
-        .timeline()
-        .from(".hero-up", { opacity: 0, y: "100%", stagger: 0.2 })
-        .from(".hero-img", { opacity: 0, y: "10%" }, 0.4);
+      gsap.timeline().from(".hero-up", { opacity: 0, y: "100%", stagger: 0.2 });
+      // .from(".hero-img", { opacity: 0, y: "10%" }, 0.4);
     },
     { scope: ref }
   );
 
   return (
     <header className="relative">
-      <div className="sm:min-h-screen md:mt-4 mt-10 grid md:grid-cols-2 gap-8 md:gap-0 container">
+      <div className="sm:min-h-screen mt-10 grid md:grid-cols-2 gap-8 md:gap-0 container">
         <div className="flex items-center h-screen sm:h-auto">
           <div className="space-y-7">
             <p

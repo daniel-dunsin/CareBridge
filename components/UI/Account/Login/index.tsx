@@ -5,10 +5,9 @@ import { ILoginData } from "@/lib/types";
 import { toastError, toastSuccess } from "@/lib/utils/toast";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { GiMedicines } from "react-icons/gi";
 
 const Login = () => {
   const {
@@ -44,16 +43,7 @@ const Login = () => {
   return (
     <div className="min-h-screen w-full flex items-center">
       <div className="container items-center grid place-content-center space-y-4">
-        <div className="grid place-content-center">
-          <Link href={"/"} className="text-2xl font-bold">
-            <div className="flex items-center gap-2">
-              <GiMedicines />
-              <span>CareBridge</span>
-            </div>
-          </Link>
-        </div>
-
-        <div className="space-y-6 p-5 min-w-96 max-w-xl bg-white dark:bg-white/10 rounded-xl border dark:border-white/10 mx-auto">
+        <div className="space-y-6 p-5 min-w-96 max-w-xl bg-white dark:bg-darkGray rounded-xl border dark:border-white/5 mx-auto">
           <div className="flex items-center gap-2 text-3xl">
             {/* <GiMedicines /> */}
             <span className="font-bold">Login</span>
@@ -92,13 +82,13 @@ const Login = () => {
               <div className="text-sm text-center text-gray-500">
                 <p>
                   Don&apos;t have an account?{" "}
-                  <Link href={"/account/register"} className="border-b border-blue-300/50">
+                  <Link href={"/account/register"} className="border-b dark:text-primary border-blue-300/50">
                     Register
                   </Link>
                 </p>
                 <p>
                   Forgot password? Click{" "}
-                  <Link href={"/account/forgot-password"} className="border-b border-blue-300/50">
+                  <Link href={"/account/forgot-password"} className="border-b dark:text-primary border-blue-300/50">
                     Here
                   </Link>
                 </p>

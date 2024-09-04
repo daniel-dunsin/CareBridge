@@ -5,11 +5,10 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import NotificationDrop from "./dropdowns/notification";
 // import ProfileDrop from "./dropdowns/profile";
 import { useRouter } from "next/navigation";
-import { CgMoon, CgSun } from "react-icons/cg";
+import ThemeToggle from "@/components/Common/Others/theme-toggle";
 
 const DNavbar = () => {
   const { toggleSidebar } = useGlobalStore();
-  const { updateDarkMode, isDark: isDarkMode } = useTheme();
 
   const router = useRouter();
 
@@ -30,19 +29,7 @@ const DNavbar = () => {
           <p className="text-xs text-gray-500">EN</p>
         </div>
         <NotificationDrop />
-        <div className="size-8 border border-gray-500/40 rounded-full grid place-content-center duration-300 hover:bg-gray-300 dark:hover:bg-white/10">
-          {isDarkMode ? (
-            <CgSun
-              className="cursor-pointer dark:text-white text-black duration-300"
-              onClick={() => updateDarkMode(false)}
-            />
-          ) : (
-            <CgMoon
-              className="cursor-pointer dark:text-white text-black duration-300"
-              onClick={() => updateDarkMode(true)}
-            />
-          )}
-        </div>
+        <ThemeToggle />
 
         {/* <ProfileDrop /> */}
       </div>
