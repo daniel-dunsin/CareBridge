@@ -10,7 +10,7 @@ const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       authorize: async (credentials) => {
-        const user = { id: crypto.randomUUID(), name: "MiraiSoft" };
+        const user = { id: crypto.randomUUID(), name: "CareBridge" };
         return user;
       },
     }),

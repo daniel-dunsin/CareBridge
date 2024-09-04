@@ -76,9 +76,22 @@ const Navbar = () => {
         </div>
 
         <div className="flex items-center gap-2">
-          <Button className="uppercase" variant="filled">
-            Login
-          </Button>
+          <div>
+            <Link href="/account/register">
+              <Button className="uppercase" variant="faint">
+                Get Started
+              </Button>
+            </Link>
+          </div>
+
+          <div>
+            <Link href="/account/login">
+              <Button className="uppercase" variant="filled">
+                Login
+              </Button>
+            </Link>
+          </div>
+
           {/* <button className="px-8 py-2 rounded-full bg-gradient-to-b from-blue-500 to-blue-600 text-white focus:ring-2 focus:ring-blue-400 hover:shadow-xl transition duration-200">
             Login
           </button> */}

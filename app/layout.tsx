@@ -3,7 +3,10 @@ import "../public/globals.css";
 import { dmSans, karla } from "@/lib/utils/fonts";
 
 export const metadata: Metadata = {
-  title: "CareBridge",
+  title: {
+    default: "CareBridge",
+    template: `%s | CareBridge`,
+  },
   description: "CareBridge is a platform that connects caregivers with patients.",
 };
 

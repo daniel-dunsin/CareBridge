@@ -24,8 +24,7 @@ export const useSideBar = create<GlobalStore>()(
       sidebarOpen: true,
       mobileOpen: false,
 
-      toggleSidebar: () =>
-        set((state) => ({ ...state, sidebarOpen: !state.sidebarOpen })),
+      toggleSidebar: () => set((state) => ({ ...state, sidebarOpen: !state.sidebarOpen })),
 
       closeSidebar: () => set((state) => ({ ...state, sidebarOpen: false })),
 
@@ -35,13 +34,12 @@ export const useSideBar = create<GlobalStore>()(
 
       closeMobileMenu: () => set((state) => ({ ...state, mobileOpen: false })),
 
-      toggleMobileMenu: () =>
-        set((state) => ({ ...state, mobileOpen: !state.mobileOpen })),
+      toggleMobileMenu: () => set((state) => ({ ...state, mobileOpen: !state.mobileOpen })),
     }),
     {
       name: "sidebar-state",
-    },
-  ),
+    }
+  )
 );
 
 // -------------------------
@@ -61,9 +59,27 @@ export const useTheme = create<ThemeStore>()(
   persist(
     (set) => ({
       isDark: false,
-      updateDarkMode: (newState) =>
-        set((state) => ({ ...state, isDark: newState })),
+      updateDarkMode: (newState) => set((state) => ({ ...state, isDark: newState })),
     }),
-    { name: "theme" },
-  ),
+    { name: "theme" }
+  )
 );
+
+// -------------------------
+// ONBOARDING
+// -------------------------
+
+type OnboardStoreState = {
+  hasRegistered: boolean;
+};
+
+type OnboardStoreActions = {
+  hasRegisteredOn: () => void;
+};
+
+type OnboardStore = OnboardStoreState & OnboardStoreActions;
+
+export const useOnboardStore = create<OnboardStore>((set) => ({
+  hasRegistered: false,
+  hasRegisteredOn: () => set((state) => ({ ...state, hasRegistered: true })),
+}));

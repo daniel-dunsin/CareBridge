@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { dmSans } from "@/lib/utils/fonts";
 import { ButtonHTMLAttributes, DetailedHTMLProps, FC, ReactNode } from "react";
 import { LuLoader2 } from "react-icons/lu";
@@ -19,7 +20,7 @@ const Button: FC<Props> = (props) => {
   const {
     onClick,
     icon,
-    className: extraClass = "",
+    className,
     variant = "filled",
     children,
     size = "extra-small",
@@ -36,7 +37,7 @@ const Button: FC<Props> = (props) => {
 
   switch (variant) {
     case "filled":
-      mainClass += "bg-primary text-black text-center ";
+      mainClass += "bg-primary text-black text-center border border-primary ";
       break;
 
     case "faint":
@@ -85,7 +86,7 @@ const Button: FC<Props> = (props) => {
       <div>
         <button
           onClick={onClick}
-          className={`${mainClass} ${extraClass} `}
+          className={cn(mainClass, className)}
           disabled={disabled || loading}
           role={role}
           {...rest}
