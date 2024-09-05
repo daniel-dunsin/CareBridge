@@ -19,3 +19,14 @@ export const userRegister = async ({
     handleAxiosErrorWithToast(err);
   }
 };
+
+export const forgotPassword = async (email: string) => {
+  try {
+    const { data } = await publicApi.post("/auth/forgot-password", { email });
+
+    toastSuccess("Reset link sent to " + email);
+    return data;
+  } catch (err) {
+    handleAxiosErrorWithToast(err);
+  }
+};
