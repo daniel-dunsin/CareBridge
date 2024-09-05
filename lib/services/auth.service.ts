@@ -30,3 +30,13 @@ export const forgotPassword = async (email: string) => {
     handleAxiosErrorWithToast(err);
   }
 };
+
+export const resetPassword = async (body: { token: string; password: string }) => {
+  try {
+    const { data } = await publicApi.patch("/auth/reset-password", body);
+    toastSuccess("Password changed successfully.");
+    return data;
+  } catch (err) {
+    handleAxiosErrorWithToast(err);
+  }
+};
