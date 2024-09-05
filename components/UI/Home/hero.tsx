@@ -28,6 +28,7 @@ const Hero = () => {
             >
               Find The Best <span className="text-primary">Medical</span> Service for you
               <span className="text-primary">.</span>
+              {/* AI-Driven Healthcare: Find the Right Care for You. */}
             </p>
 
             <p className="leading-relaxed text-gray-500 max-w-xl">

@@ -49,3 +49,21 @@ export type IDef = {
   createdAt: string;
   updatedAt: string;
 };
+
+export type ITokens = {
+  accessToken: string;
+  refreshToken: string;
+  lifeSpan: number;
+};
+
+export type IUser = {
+  email: string;
+  phoneNumber: string;
+  firstName: string;
+  lastName: string;
+  emailVerified: boolean;
+  gender: Gender;
+  profilePicture: string;
+  role: Role;
+  meta: ITokens;
+} & IDef;
