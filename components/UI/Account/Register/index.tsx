@@ -39,7 +39,7 @@ const Register = () => {
                   <div
                     key={id}
                     className={`border space-y-2 rounded-xl border-gray-500/20 mx-auto dark:border-white/10 px-20 sm:py-6 py-4 cursor-pointer duration-200 ring ring-transparent hover:ring-primary ${
-                      tag === mainTag ? "bg-primary text-white" : "bg-white dark:bg-white/10"
+                      tag === mainTag ? "bg-primary text-black" : "bg-white dark:bg-white/10"
                     }`}
                     onClick={() => setTag(tag)}
                   >

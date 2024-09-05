@@ -65,7 +65,7 @@ const PatientRegister: FC<Props> = ({ updateTag }) => {
         <div className="px-10 space-y-8">
           <div className="max-w-md">
             <h2 className="text-3xl font-bold">Create a Patient Account</h2>
-            <p className="text-gray-500">
+            <p className="text-gray-500 dark:text-gray-400">
               By clicking <span className="font-semibold">continue</span>, you agree to our{" "}
               <span className="text-primary border-b">Terms</span> and <span className="text-primary">Conditions</span>
             </p>
@@ -79,7 +79,7 @@ const PatientRegister: FC<Props> = ({ updateTag }) => {
                     <label htmlFor="firstName">First Name</label>
                     <input
                       type="text"
-                      className="w-full bg-transparent p-2 border dark:border-white/10 rounded-lg bg-white dark:bg-white/10 dark:placeholder:text-gray-600"
+                      className="w-full bg-transparent p-2 border dark:border-white/10 rounded-lg bg-white dark:bg-white/10 dark:placeholder:text-gray-400"
                       placeholder="Jon"
                       {...register("firstName", { required: true })}
                     />
@@ -89,7 +89,7 @@ const PatientRegister: FC<Props> = ({ updateTag }) => {
                     <input
                       type="text"
                       {...register("lastName", { required: true })}
-                      className="w-full bg-transparent p-2 border dark:border-white/10 rounded-lg bg-white dark:bg-white/10 dark:placeholder:text-gray-600"
+                      className="w-full bg-transparent p-2 border dark:border-white/10 rounded-lg bg-white dark:bg-white/10 dark:placeholder:text-gray-400"
                       placeholder="Simon"
                     />
                   </div>
@@ -98,7 +98,7 @@ const PatientRegister: FC<Props> = ({ updateTag }) => {
                     <input
                       type="email"
                       {...register("email", { required: true })}
-                      className="w-full bg-transparent p-2 border dark:border-white/10 rounded-lg bg-white dark:bg-white/10 dark:placeholder:text-gray-600"
+                      className="w-full bg-transparent p-2 border dark:border-white/10 rounded-lg bg-white dark:bg-white/10 dark:placeholder:text-gray-400"
                       placeholder="jonsimon@domain.com"
                     />
                   </div>
@@ -107,7 +107,7 @@ const PatientRegister: FC<Props> = ({ updateTag }) => {
                     <input
                       type="text"
                       {...register("phoneNumber", { required: true })}
-                      className="w-full bg-transparent p-2 border dark:border-white/10 rounded-lg bg-white dark:bg-white/10 dark:placeholder:text-gray-600"
+                      className="w-full bg-transparent p-2 border dark:border-white/10 rounded-lg bg-white dark:bg-white/10 dark:placeholder:text-gray-400"
                       placeholder="+234..."
                     />
                   </div>
@@ -120,8 +120,8 @@ const PatientRegister: FC<Props> = ({ updateTag }) => {
                           onClick={() => setGender(gen.name)}
                           className={`p-2 rounded-lg flex items-center gap-2 duration-300 cursor-pointer ${
                             gen.name === gender
-                              ? "bg-primary"
-                              : "bg-white dark:bg-white/10 dark:placeholder:text-gray-600 border border-gray-200 dark:border-white/10"
+                              ? "bg-primary text-black"
+                              : "bg-white dark:bg-white/10 dark:placeholder:text-gray-400 border border-gray-200 dark:border-white/10"
                           }`}
                         >
                           {gen.icon}
@@ -135,7 +135,7 @@ const PatientRegister: FC<Props> = ({ updateTag }) => {
                     <input
                       type="password"
                       {...register("password", { required: true })}
-                      className="w-full bg-transparent p-2 border dark:border-white/10 rounded-lg bg-white dark:bg-white/10 dark:placeholder:text-gray-600"
+                      className="w-full bg-transparent p-2 border dark:border-white/10 rounded-lg bg-white dark:bg-white/10 dark:placeholder:text-gray-400"
                       placeholder="***************"
                     />
                   </div>
