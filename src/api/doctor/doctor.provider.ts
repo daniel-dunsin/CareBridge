@@ -130,7 +130,7 @@ export class DoctorProvider {
 
     await this.mailService.sendMail({
       to: data.user.email,
-      subject: 'BDMeds: KYC Verification Successful',
+      subject: 'CareBridge: KYC Verification Successful',
       template: 'kyc-verification-successful',
       context: {
         firstName: data.user?.firstName,
@@ -152,7 +152,7 @@ export class DoctorProvider {
 
     await this.mailService.sendMail({
       to: data.user.email,
-      subject: 'BDMeds: KYC Verification Failed',
+      subject: 'CareBridge: KYC Verification Failed',
       template: 'kyc-verification-failed',
       context: {
         firstName: data.user?.firstName,
