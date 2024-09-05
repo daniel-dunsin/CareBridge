@@ -13,6 +13,8 @@ import { toastError } from "@/lib/utils/toast";
 import { IDoctorRegister } from "@/lib/types";
 import { useOnboardStore } from "@/lib/store/global.store";
 import Select from "@/components/Common/Inputs/select";
+import { getSpecializations } from "@/lib/services/doctors.service";
+import { userRegister } from "@/lib/services/auth.service";
 
 type Props = {
   updateTag: (tag: Tag | null) => void;
@@ -32,9 +34,37 @@ const DoctorRegister: FC<Props> = ({ updateTag }) => {
 
   const router = useRouter();
 
+  const { data: specializations, isPending: specializationLoading } = useQuery({
+    queryKey: ["specializations"],
+    queryFn: getSpecializations,
+  });
+
   const { hasRegisteredOn } = useOnboardStore();
 
-  const submit: SubmitHandler<IDoctorRegister> = async (data) => {};
+  const { mutate, isPending: loading } = useMutation({
+    mutationFn: userRegister,
+    onSuccess: () => {
+      hasRegisteredOn();
+      router.replace("/account/confirm-email");
+    },
+  });
+
+  const submit: SubmitHandler<IDoctorRegister> = async (data) => {
+    if (!specialization) {
+      toastError("Please selected a specialization");
+      return;
+    }
+
+    mutate({
+      data: {
+        ...data,
+        gender: gender.toLowerCase(),
+        speciality: specialization,
+        yearsOfExperience: data.yearsOfExperience.toString(),
+      },
+      type: "doctor",
+    });
+  };
 
   return (
     <motion.div {...opacityVariant} className="min-h-screen w-full flex items-center">
@@ -110,16 +140,15 @@ const DoctorRegister: FC<Props> = ({ updateTag }) => {
                     <Select
                       label="Specialization"
                       onValueChange={updateSpecialization}
-                      options={[]}
+                      options={
+                        specializations?.map((name) => ({
+                          value: name,
+                          label: name,
+                        })) ?? []
+                      }
                       placeholder="Select specialization"
+                      loading={specializationLoading}
                     />
-
-                    {/* <input
-                      type="text"
-                      {...register("specialization", { required: true })}
-                      className="w-full bg-transparent p-2 border dark:border-white/10 rounded-lg bg-white dark:bg-white/10 dark:placeholder:text-gray-600"
-                      placeholder="e.g Dentistry"
-                    /> */}
                   </div>
                   <div className="space-y-1">
                     <label htmlFor="specialization">Experience (Years)</label>
