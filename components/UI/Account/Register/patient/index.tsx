@@ -11,6 +11,7 @@ import { Tag } from "..";
 import { FaChevronLeft } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { useOnboardStore } from "@/lib/store/global.store";
+import { userRegister } from "@/lib/services/auth.service";
 
 type Props = {
   updateTag: (tag: Tag | null) => void;
@@ -29,16 +30,16 @@ const PatientRegister: FC<Props> = ({ updateTag }) => {
 
   const { hasRegisteredOn } = useOnboardStore();
 
-  // const { mutate, isPending: loading } = useMutation({
-  //   mutationFn: userRegister,
-  //   onSuccess: () => {
-  //     hasRegisteredOn();
-  //     router.replace("/account/confirm-email");
-  //   },
-  // });
+  const { mutate, isPending: loading } = useMutation({
+    mutationFn: userRegister,
+    onSuccess: () => {
+      hasRegisteredOn();
+      router.replace("/account/confirm-email");
+    },
+  });
 
   const submit: SubmitHandler<IPatientRegister> = async (data) => {
-    // mutate({ data: { ...data, gender: gender.toLowerCase() }, type: "patient" });
+    mutate({ data: { ...data, gender: gender.toLowerCase() }, type: "patient" });
   };
 
   return (
@@ -139,7 +140,9 @@ const PatientRegister: FC<Props> = ({ updateTag }) => {
                     />
                   </div>
                 </div>
-                <Button fullWidth>Continue</Button>
+                <Button fullWidth loading={loading}>
+                  Continue
+                </Button>
               </div>
             </form>
           </div>

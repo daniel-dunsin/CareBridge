@@ -64,9 +64,13 @@ const Navbar = () => {
     >
       <div className="container flex items-center justify-between py-4">
         <div className="flex items-center gap-16">
-          <div className="flex items-center gap-1 text-black dark:text-offWhite">
-            <BiHealth size={20} className="text-primary" />
-            <span className="font-bold text-lg">CareBridge</span>
+          <div>
+            <Link href={"/"}>
+              <div className="flex items-center gap-1 text-black dark:text-offWhite">
+                <BiHealth size={20} className="text-primary" />
+                <span className="font-bold text-lg">CareBridge</span>
+              </div>
+            </Link>
           </div>
 
           <ul className="sm:flex hidden items-center md:gap-8 sm:gap-4 font-semibold text-xs uppercase">
