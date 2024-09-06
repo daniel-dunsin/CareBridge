@@ -13,7 +13,7 @@ import useDimension from "@/lib/hooks/useDimension";
 const EarthModelView = dynamic(() => import("@/components/Common/Models/earth"), {
   ssr: false,
   loading: () => (
-    <div className="w-full h-full border-8 flex items-center justify-center">
+    <div className="w-full h-full flex items-center justify-center">
       <ThreeDotsLoader />
     </div>
   ),
