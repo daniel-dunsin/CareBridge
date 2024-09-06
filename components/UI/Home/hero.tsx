@@ -6,6 +6,18 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 import { montserrat } from "@/lib/utils/fonts";
+import ThreeDotsLoader from "@/components/Common/Loaders/three-dots";
+import dynamic from "next/dynamic";
+import useDimension from "@/lib/hooks/useDimension";
+
+const EarthModelView = dynamic(() => import("@/components/Common/Models/earth"), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-full grid place-content-center">
+      <ThreeDotsLoader />
+    </div>
+  ),
+});
 
 const Hero = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -13,10 +25,11 @@ const Hero = () => {
   useGSAP(
     () => {
       gsap.timeline().from(".hero-up", { opacity: 0, y: "100%", stagger: 0.2 });
-      // .from(".hero-img", { opacity: 0, y: "10%" }, 0.4);
     },
     { scope: ref }
   );
+
+  const { width } = useDimension();
 
   return (
     <header className="relative">
@@ -44,6 +57,8 @@ const Hero = () => {
             </div>
           </div>
         </div>
+
+        {width > 768 && <EarthModelView />}
       </div>
     </header>
   );
