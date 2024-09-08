@@ -75,7 +75,7 @@ const authOptions: AuthOptions = {
     strategy: "jwt",
   },
   pages: {
-    signIn: "/dashboard",
+    signIn: "/",
     signOut: "/",
     error: "/",
   },

@@ -11,7 +11,7 @@ const SidebarSkeleton = () => {
         <div className="pl-6 py-4 border-b dark:border-white/10">
           <div className="flex items-center gap-2">
             <GiMedicines className="text-primary" />
-            <span className="font-bold">BDMeds</span>
+            <span className="font-bold">CareBridge</span>
           </div>
         </div>
 

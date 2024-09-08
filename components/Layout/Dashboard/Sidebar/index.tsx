@@ -7,9 +7,9 @@ import { FiLogOut } from "react-icons/fi";
 import { useEffect, useState } from "react";
 import { doctorLinks, bottomSidebarLinks, patientLinks, adminLinks } from "@/lib/data/sidebar";
 import SidebarSkeleton from "./skeleton";
-import { GiMedicines } from "react-icons/gi";
 import { useGlobalStore } from "@/lib/store/global.store";
 import useUserInfo from "@/lib/hooks/useUserInfo";
+import Logo from "@/components/Common/Logos";
 
 const Sidebar = () => {
   const pathname = usePathname();
@@ -47,10 +47,10 @@ const Sidebar = () => {
         <>
           <div>
             <div className={`pl-6 border-b dark:border-white/10 ${sidebarOpen ? "py-3" : "py-4"}`}>
-              <Link href={"/dashboard"} className="text-xl font-bold">
+              <Link href={"/dashboard"} className="text-xl">
                 <div className="flex items-center gap-2">
-                  <GiMedicines className="text-primary" />
-                  {sidebarOpen && <span className="font-bold">BDMeds</span>}
+                  <Logo />
+                  {sidebarOpen && <span className="font-extrabold">CareBridge</span>}
                 </div>
               </Link>
             </div>
@@ -63,11 +63,9 @@ const Sidebar = () => {
                       <li key={linkIndex}>
                         <Link
                           href={link.path}
-                          // onMouseOver={!sidebarOpen ? openSidebar : undefined}
-                          // onMouseLeave={!sidebarOpen ? closeSidebar : undefined}
                           className={`flex items-center rounded-full transition-colors duration-300 gap-4 m-over ${
                             pathname.startsWith(link.path)
-                              ? "bg-primary text-white"
+                              ? "bg-primary text-black"
                               : "dark:text-white dark:hover:bg-white/10 hover:bg-zinc-300 hover:text-black "
                           } ${sidebarOpen ? "px-5 py-2" : "grid place-content-center size-8"}`}
                         >

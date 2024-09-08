@@ -8,7 +8,7 @@ const useUserInfo = () => {
   const { data: user, isPending: loading } = useQuery({
     queryFn: () => getUser(),
     queryKey: ["user", "info"],
-    enabled: session?.user ? true : false,
+    enabled: !!session?.user,
     staleTime: 1000 * 60 * 3600,
   });
 
