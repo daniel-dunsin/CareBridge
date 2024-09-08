@@ -24,26 +24,26 @@ type SidebarLink = {
 
 const baseLinks: Link[] = [
   {
-    iconOutlined: <MdOutlineDashboard />,
-    iconFilled: <MdDashboard />,
+    iconOutlined: <MdOutlineDashboard size={26} />,
+    iconFilled: <MdDashboard size={26} />,
     text: "Dashboard",
     path: "/dashboard",
   },
   {
-    iconOutlined: <FaUserDoctor />,
-    iconFilled: <FaUserDoctor />,
+    iconOutlined: <FaUserDoctor size={26} />,
+    iconFilled: <FaUserDoctor size={26} />,
     text: "Appointments",
     path: "/appointments",
   },
   {
-    iconOutlined: <MdOutlineAnalytics />,
-    iconFilled: <MdAnalytics />,
+    iconOutlined: <MdOutlineAnalytics size={26} />,
+    iconFilled: <MdAnalytics size={26} />,
     text: "Analytics",
     path: "/analytics",
   },
   {
-    iconOutlined: <TbMedicineSyrup />,
-    iconFilled: <TbMedicineSyrup />,
+    iconOutlined: <TbMedicineSyrup size={26} />,
+    iconFilled: <TbMedicineSyrup size={26} />,
     text: "Pharmacy",
     path: "/pharmacy",
   },
@@ -93,12 +93,12 @@ export const doctorLinks: SidebarLink[] = [
         text: "Patients",
         path: "/patients",
       },
-      {
-        iconOutlined: <MdOutlineCurrencyExchange />,
-        iconFilled: <MdOutlineCurrencyExchange />,
-        text: "Billings",
-        path: "/bills",
-      },
+      // {
+      //   iconOutlined: <MdOutlineCurrencyExchange />,
+      //   iconFilled: <MdOutlineCurrencyExchange />,
+      //   text: "Billings",
+      //   path: "/bills",
+      // },
       {
         iconOutlined: <MdOutlineReport />,
         iconFilled: <MdReport />,

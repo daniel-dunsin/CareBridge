@@ -37,7 +37,7 @@ const Sidebar = () => {
 
   return (
     <aside
-      className={`fixed top-0 z-[100] min-h-screen overflow-x-hidden duration-300 w-0 dark:bg-[#131921] bg-white dark:bg-white/10 overflow-y-auto show-scroll flex flex-col gap-10 justify-between ${
+      className={`fixed top-0 z-[100] min-h-screen overflow-x-hidden duration-300 w-0 dark:bg-[#272727] bg-white text-[#f3fdfe] dark:bg-white/10 overflow-y-auto show-scroll flex flex-col gap-10 justify-between ${
         sidebarOpen ? "xl:w-[280px] md:w-[260px]" : "w-[60px]"
       }`}
     >
@@ -46,7 +46,7 @@ const Sidebar = () => {
       ) : (
         <>
           <div>
-            <div className={`pl-6 border-b dark:border-white/10 ${sidebarOpen ? "py-3" : "py-4"}`}>
+            <div className={`pl-6 dark:border-white/10 ${sidebarOpen ? "py-3" : "py-4"}`}>
               <Link href={"/dashboard"} className="text-xl">
                 <div className="flex items-center gap-2">
                   <Logo />
@@ -55,7 +55,7 @@ const Sidebar = () => {
               </Link>
             </div>
 
-            <div className="mt-5 space-y-4 px-4">
+            <div className="mt-5 space-y-2">
               {links.map((section, index) => (
                 <div key={index} className="space-y-1">
                   <ul className={`${sidebarOpen ? "space-y-2" : "space-y-3"}`}>
@@ -63,11 +63,15 @@ const Sidebar = () => {
                       <li key={linkIndex}>
                         <Link
                           href={link.path}
-                          className={`flex items-center rounded-full transition-colors duration-300 gap-4 m-over ${
+                          className={`flex items-center transition-colors duration-300 gap-4 m-over ${
                             pathname.startsWith(link.path)
-                              ? "bg-primary text-black"
-                              : "dark:text-white dark:hover:bg-white/10 hover:bg-zinc-300 hover:text-black "
-                          } ${sidebarOpen ? "px-5 py-2" : "grid place-content-center size-8"}`}
+                              ? "bg-[#404040] font-semibold border-l-0 border border-b-[5px] border-[#010101]"
+                              : "dark:text-white dark:hover:bg-[#010101]/20 font-medium hover:bg-zinc-300 hover:text-black "
+                          } ${
+                            sidebarOpen
+                              ? "px-5 py-3 mr-4 rounded-r-2xl"
+                              : "grid place-content-center py-3 mr-2 rounded-r-full"
+                          }`}
                         >
                           <span>{pathname.startsWith(link.path) ? link.iconFilled : link.iconOutlined}</span>
                           {sidebarOpen && <span>{link.text}</span>}
@@ -91,7 +95,7 @@ const Sidebar = () => {
                           href={link.path}
                           className={`flex items-center rounded-full transition-colors duration-300 gap-4 m-over mx-auto ${
                             link.path.startsWith(pathname) ? "text-primary" : "dark:text-white hover:text-primary"
-                          } ${sidebarOpen ? "px-7 py-3" : "grid place-content-center size-8"}`}
+                          } ${sidebarOpen ? "px-5 py-2" : "grid place-content-center size-8"}`}
                         >
                           <span>{link.path.startsWith(pathname) ? link.iconFilled : link.iconOutlined}</span>
 
@@ -105,8 +109,8 @@ const Sidebar = () => {
             </div>
 
             <div
-              className={`hover:text-primary duration-300 grid md:flex items-center gap-4 cursor-pointer ${
-                sidebarOpen ? "px-7 py-3" : "grid place-content-center mx-auto py-2"
+              className={`hover:text-primary duration-300 grid md:flex py-2 items-center gap-4 cursor-pointer ${
+                sidebarOpen ? "px-5" : "grid place-content-center mx-auto"
               }`}
               onClick={() => signOut()}
             >

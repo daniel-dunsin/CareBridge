@@ -90,7 +90,7 @@ const Navbar = () => {
             <>
               {status === "authenticated" && session ? (
                 <div>
-                  <Link href="/dashbaord">
+                  <Link href="/dashboard">
                     <Button className="uppercase">Dashboard</Button>
                   </Link>
                 </div>
