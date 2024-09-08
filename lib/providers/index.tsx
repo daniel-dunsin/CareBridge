@@ -6,6 +6,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster as SonnerToaster } from "sonner";
 import { SessionProvider } from "next-auth/react";
 import { useTheme } from "../store/global.store";
+import { Leva } from "leva";
 
 export const queryClient = new QueryClient();
 
@@ -45,6 +46,7 @@ const Providers = ({ children }: { children: ReactNode }) => {
           }}
         />
         <>{children}</>
+        <Leva hidden={isProduction} />
         <ReactQueryDevtools />
       </QueryClientProvider>
     </SessionProvider>

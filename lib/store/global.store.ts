@@ -42,7 +42,7 @@ export const useTheme = create<ThemeStore>()(
       isDark: true,
       updateDarkMode: (newState) => set((state) => ({ ...state, isDark: newState })),
     }),
-    { name: "theme" }
+    { name: "cb-theme" }
   )
 );
 

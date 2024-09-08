@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useGLTF, Html, OrbitControls, Environment, ContactShadows } from "@react-three/drei";
 import { FaMapMarkerAlt } from "react-icons/fa";
+import { useControls } from "leva";
 
 type GLTFResult = {
   nodes: {
@@ -29,8 +30,23 @@ function Model(props: ModelProps) {
   // Load the GLTF model
   const { nodes, materials } = useGLTF("/models/earth.gltf") as unknown as GLTFResult;
 
+  const ref = useRef<THREE.Group<THREE.Object3DEventMap>>(null);
+
+  const { rotationX, rotationY, rotationZ, rotationSpeed } = useControls({
+    rotationX: -0.12,
+    rotationY: 0,
+    rotationZ: -0.32,
+    rotationSpeed: {
+      step: 0.01,
+      value: 0.01,
+      min: 0.01,
+    },
+  });
+
+  useFrame(() => {});
+
   return (
-    <group rotation={[-Math.PI / 2, 0, Math.PI]} {...props} dispose={null}>
+    <group rotation={[-Math.PI / 2, 0, Math.PI]} ref={ref} {...props} dispose={null}>
       <mesh geometry={nodes["URF-Height_Lampd_Ice_0"].geometry} material={materials.Lampd_Ice} />
       <mesh geometry={nodes["URF-Height_watr_0"].geometry} material={materials.watr} material-roughness={0} />
       <mesh geometry={nodes["URF-Height_Lampd_0"].geometry} material={materials.Lampd} material-color="lightgreen">
