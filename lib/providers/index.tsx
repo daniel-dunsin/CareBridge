@@ -7,6 +7,7 @@ import { Toaster as SonnerToaster } from "sonner";
 import { SessionProvider } from "next-auth/react";
 import { useTheme } from "../store/global.store";
 import { Leva } from "leva";
+import { ModalProvider } from "./modal-provider";
 
 export const queryClient = new QueryClient();
 
@@ -45,7 +46,7 @@ const Providers = ({ children }: { children: ReactNode }) => {
             style: !isDarkMode ? toastOptions : toastOptionsDark,
           }}
         />
-        <>{children}</>
+        <ModalProvider>{children}</ModalProvider>
         {/* <Leva hidden={isProduction} /> */}
         <ReactQueryDevtools />
       </QueryClientProvider>

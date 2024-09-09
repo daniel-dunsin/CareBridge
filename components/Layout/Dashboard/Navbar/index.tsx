@@ -3,9 +3,9 @@ import { useGlobalStore, useTheme } from "@/lib/store/global.store";
 import { CiSearch } from "react-icons/ci";
 import { RxHamburgerMenu } from "react-icons/rx";
 import NotificationDrop from "./dropdowns/notification";
-// import ProfileDrop from "./dropdowns/profile";
 import { useRouter } from "next/navigation";
 import ThemeToggle from "@/components/Common/Others/theme-toggle";
+import ProfileDrop from "./dropdowns/profile";
 
 const DNavbar = () => {
   const { toggleSidebar } = useGlobalStore();
@@ -26,9 +26,8 @@ const DNavbar = () => {
 
       <div className="flex items-center gap-2">
         <NotificationDrop />
-        <ThemeToggle />
-
-        {/* <ProfileDrop /> */}
+        {/* <ThemeToggle /> */}
+        <ProfileDrop />
       </div>
     </nav>
   );
