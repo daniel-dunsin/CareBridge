@@ -32,18 +32,18 @@ function Model(props: ModelProps) {
 
   const ref = useRef<THREE.Group<THREE.Object3DEventMap>>(null);
 
-  const { rotationX, rotationY, rotationZ, rotationSpeed } = useControls({
-    rotationX: -0.12,
-    rotationY: 0,
-    rotationZ: -0.32,
-    rotationSpeed: {
-      step: 0.01,
-      value: 0.01,
-      min: 0.01,
-    },
-  });
+  // const { rotationX, rotationY, rotationZ, rotationSpeed } = useControls({
+  //   rotationX: -0.12,
+  //   rotationY: 0,
+  //   rotationZ: -0.32,
+  //   rotationSpeed: {
+  //     step: 0.01,
+  //     value: 0.01,
+  //     min: 0.01,
+  //   },
+  // });
 
-  useFrame(() => {});
+  // useFrame(() => {});
 
   return (
     <group rotation={[-Math.PI / 2, 0, Math.PI]} ref={ref} {...props} dispose={null}>
