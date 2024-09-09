@@ -14,12 +14,12 @@ const config: Config = {
     },
     extend: {
       colors: {
-        secondary: "",
         primary: "#adf506",
         offWhite: "#fafafa",
         lightShade: "#f2fdd2",
         dark: "#212121",
         darkGray: "#272727",
+        lightGray: "#404040",
       },
     },
   },

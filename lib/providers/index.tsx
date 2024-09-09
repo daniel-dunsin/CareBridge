@@ -47,7 +47,7 @@ const Providers = ({ children }: { children: ReactNode }) => {
           }}
         />
         <ModalProvider>{children}</ModalProvider>
-        {/* <Leva hidden={isProduction} /> */}
+        {!isProduction && <Leva hidden={isProduction} />}
         <ReactQueryDevtools />
       </QueryClientProvider>
     </SessionProvider>

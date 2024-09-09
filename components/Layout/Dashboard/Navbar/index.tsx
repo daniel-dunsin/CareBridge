@@ -1,7 +1,6 @@
 "use client";
 import { useGlobalStore } from "@/lib/store/global.store";
 import NotificationDrop from "./dropdowns/notification";
-import { useRouter } from "next/navigation";
 import ThemeToggle from "@/components/Common/Others/theme-toggle";
 import ProfileDrop from "./dropdowns/profile";
 import { VscLayoutSidebarLeftOff } from "react-icons/vsc";
