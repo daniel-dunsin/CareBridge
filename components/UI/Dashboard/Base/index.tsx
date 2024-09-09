@@ -11,7 +11,7 @@ const Dashboard = () => {
   return (
     <div className="space-y-4 mt-4">
       <div className="grid grid-cols-4 gap-3">
-        <div className="col-span-2 rounded-lg bg-[#404040] bold-border"></div>
+        <div className="col-span-2 rounded-lg dark:bg-[#404040] bg-lightShade bold-border"></div>
         {cards.map((card, id) => (
           <OverviewCardComponent key={id} {...card} />
         ))}

@@ -37,7 +37,7 @@ const Sidebar = () => {
 
   return (
     <aside
-      className={`fixed top-0 z-[100] min-h-screen overflow-x-hidden duration-300 w-0 dark:bg-darkGray bg-white text-[#f3fdfe] overflow-y-auto show-scroll flex flex-col gap-10 justify-between ${
+      className={`fixed top-0 z-[100] min-h-screen overflow-x-hidden duration-300 w-0 dark:bg-darkGray bg-white dark:text-[#f3fdfe] overflow-y-auto show-scroll flex flex-col gap-10 justify-between ${
         sidebarOpen ? "xl:w-[280px] md:w-[260px]" : "w-[60px]"
       }`}
     >
@@ -65,7 +65,7 @@ const Sidebar = () => {
                           href={link.path}
                           className={`flex items-center transition-colors duration-300 gap-4 m-over ${
                             pathname.startsWith(link.path)
-                              ? "bg-[#404040] font-semibold border-l-0 border border-b-[5px] border-[#010101]"
+                              ? "dark:bg-[#404040] bg-lightShade font-semibold border-l-0 border border-b-[5px] border-[#010101]"
                               : "dark:text-white dark:hover:bg-[#010101]/20 font-medium hover:bg-zinc-300 hover:text-black "
                           } ${
                             sidebarOpen

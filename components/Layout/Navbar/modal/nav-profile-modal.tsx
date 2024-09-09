@@ -2,14 +2,15 @@
 
 import Modal from "@/components/Common/Modal";
 import { useModal } from "@/lib/providers/modal-provider";
-import { CgHome, CgProfile } from "react-icons/cg";
 import { IoIosLogOut } from "react-icons/io";
 import { fadeToBottomVariant } from "@/lib/utils/variants";
-import { signOut } from "next-auth/react";
 import Image from "next/image";
 import useUserInfo from "@/lib/hooks/useUserInfo";
 import { motion } from "framer-motion";
 import { useTheme } from "@/lib/store/global.store";
+import { RiVerifiedBadgeFill } from "react-icons/ri";
+import { IoIosCloseCircle } from "react-icons/io";
+import { signOut } from "next-auth/react";
 
 const NavProfileModal = () => {
   const { hideModal } = useModal();
@@ -20,7 +21,7 @@ const NavProfileModal = () => {
     <Modal onClose={hideModal}>
       <motion.div
         {...fadeToBottomVariant}
-        className="bg-white dark:bg-dark shadow-2xl rounded-md pt-5 overflow-hidden space-y-4"
+        className="bg-white dark:bg-darkGray shadow-2xl rounded-2xl py-8 overflow-hidden space-y-6"
       >
         <div className="grid place-content-center text-center space-y-2">
           <div
@@ -39,28 +40,36 @@ const NavProfileModal = () => {
             )}
           </div>
 
-          <p className="text-xs text-gray-500 dark:text-gray-200">{user?.email}</p>
+          <div className="leading-tight">
+            <p>
+              {user?.firstName} {user?.lastName}
+            </p>
+            <p className="text-xs text-gray-500 dark:text-gray-200">{user?.email}</p>
+            <div className="flex items-center justify-center">
+              {user?.emailVerified ? (
+                <div className="flex items-center justify-center text-xs gap-[2px] py-[2px] px-1 rounded-full bg-primary/20 text-primary font-bold">
+                  <RiVerifiedBadgeFill />
+                  <span>Verified</span>
+                </div>
+              ) : (
+                <div className="flex items-center justify-center text-xs gap-[2px] py-[2px] px-1 rounded-full bg-red-500/20 text-red-500 font-bold">
+                  <IoIosCloseCircle />
+                  <span>Unverified</span>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
 
-        <ul className="grid grid-cols-2 dark:border-white/10 border-t">
-          <li className="py-2 cursor-pointer duration-300 hover:bg-gray-100 dark:hover:bg-[#3d3d3d] flex items-center gap-1 justify-center text-gray-500 dark:text-gray-200 text-center dark:border-white/10 border-r">
-            <span>Setting</span>
-            <CgProfile />
-          </li>
-          <div>
-            <li className="py-2 cursor-pointer duration-300 hover:bg-gray-100 dark:hover:bg-[#3d3d3d] flex items-center gap-1 justify-center text-gray-500 dark:text-gray-200 text-center">
-              <span>Home</span>
-              <CgHome />
-            </li>
-          </div>
-          <li
-            className="py-2 cursor-pointer duration-300 hover:bg-gray-100 dark:hover:bg-[#3d3d3d] flex items-center gap-1 justify-center text-gray-500 dark:text-gray-200 text-center col-span-2 dark:border-white/10 border-t"
+        <div className="flex items-center justify-center">
+          <button
+            className="flex items-center gap-2 dark:text-[#919191] dark:hover:text-red-500 duration-200"
             onClick={() => signOut()}
           >
-            <span>Logout</span>
             <IoIosLogOut />
-          </li>
-        </ul>
+            <span>Logout</span>
+          </button>
+        </div>
       </motion.div>
     </Modal>
   );
