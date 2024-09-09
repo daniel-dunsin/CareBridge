@@ -13,7 +13,7 @@ const DNavbar = () => {
   const router = useRouter();
 
   return (
-    <nav className="bg-white dark:bg-dark w-full p-[0.5rem] border-b dark:border-white/10 flex z-[1000] items-center justify-between sticky top-0 left-0">
+    <nav className="bg-white dark:bg-dark w-full p-[0.5rem] dark:border-white/10 flex z-[1000] items-center justify-between sticky top-0 left-0">
       <div className="flex items-center gap-2">
         <div className="size-8 grid place-content-center cursor-pointer duration-200 hover:bg-primary hover:text-black rounded-full border dark:border-white/10">
           <RxHamburgerMenu onClick={toggleSidebar} />
@@ -25,9 +25,6 @@ const DNavbar = () => {
       </div>
 
       <div className="flex items-center gap-2">
-        <div className="size-8 rounded-full border dark:border-white/10 grid place-content-center hover:bg-gray-100 duration-300 cursor-pointer">
-          <p className="text-xs text-gray-500">EN</p>
-        </div>
         <NotificationDrop />
         <ThemeToggle />
 

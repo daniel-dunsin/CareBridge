@@ -24,26 +24,26 @@ type SidebarLink = {
 
 const baseLinks: Link[] = [
   {
-    iconOutlined: <MdOutlineDashboard size={26} />,
-    iconFilled: <MdDashboard size={26} />,
+    iconOutlined: <MdOutlineDashboard />,
+    iconFilled: <MdDashboard />,
     text: "Dashboard",
     path: "/dashboard",
   },
   {
-    iconOutlined: <FaUserDoctor size={26} />,
-    iconFilled: <FaUserDoctor size={26} />,
+    iconOutlined: <FaUserDoctor />,
+    iconFilled: <FaUserDoctor />,
     text: "Appointments",
     path: "/appointments",
   },
   {
-    iconOutlined: <MdOutlineAnalytics size={26} />,
-    iconFilled: <MdAnalytics size={26} />,
+    iconOutlined: <MdOutlineAnalytics />,
+    iconFilled: <MdAnalytics />,
     text: "Analytics",
     path: "/analytics",
   },
   {
-    iconOutlined: <TbMedicineSyrup size={26} />,
-    iconFilled: <TbMedicineSyrup size={26} />,
+    iconOutlined: <TbMedicineSyrup />,
+    iconFilled: <TbMedicineSyrup />,
     text: "Pharmacy",
     path: "/pharmacy",
   },

@@ -31,6 +31,12 @@ body {
   }
 }
 
+@layer components {
+  .bold-border {
+    @apply border border-b-[5px] dark:border-[#010101];
+  }
+}
+
 ::-webkit-scrollbar {
   width: 4px;
 }
