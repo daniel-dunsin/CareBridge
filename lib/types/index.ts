@@ -67,3 +67,75 @@ export type IUser = {
   role: Role;
   meta: ITokens;
 } & IDef;
+
+export type KycStatus = "pending" | "failed" | "successful";
+
+export type Kyc = {
+  id: string;
+  idDoc: string;
+  idType: KycID;
+  createdAt: string;
+  updatedAt: string;
+  professionalCert: string;
+  idDocPublicId: string;
+  professionalCertPublicId: string;
+  status: KycStatus;
+};
+
+export type IPatient = {
+  _id: string;
+  user: IUser;
+  favouriteDoctors: IDoctor[];
+} & IDef;
+
+export type IDoctor = {
+  yearsOfExperience: number;
+  speciality: string;
+  qualifications: [];
+  kycVerified: boolean;
+  isAvailable: boolean;
+  bio: string;
+  availableDays: AvailableDay[];
+  kycDetails: Kyc | null;
+  _id: string;
+  user: IUser;
+  address?: Address;
+  socials?: Socials;
+  department: Department;
+  chargePerSession: number;
+} & IDef;
+
+export type ChangePassword = {
+  oldPassword: string;
+  newPassword: string;
+};
+
+export type Department =
+  | "Cardiology (Heart)"
+  | "Dentistry (Teeth and Oral Health)"
+  | "Neurology (Nervous System)"
+  | "Orthopedics (Musculoskeletal System)"
+  | "Optometry (Eye and Vision Care)"
+  | "Psychotherapy (Mental Health)"
+  | "Nephrology (Kidneys)"
+  | "Hepatology (Liver)"
+  | "Dermatology (Skin)";
+
+export type Socials = {
+  facebook: string;
+  whatsapp: string;
+  twitter: string;
+  linkedin: string;
+};
+
+export type AvailableDay = {
+  day: string;
+  startTime: string;
+  endTime: string;
+};
+
+export type Address = {
+  state: string;
+  city: string;
+  country: string;
+};
