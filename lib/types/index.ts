@@ -1,3 +1,5 @@
+import { DiagnosisDocument, DiagnosisRef } from "./reports";
+
 export type KycID =
   | "National Identification Card"
   | "International Passport"
@@ -138,4 +140,37 @@ export type Address = {
   state: string;
   city: string;
   country: string;
+};
+
+export type Appointment = {
+  patient: IPatient;
+  doctor: IDoctor;
+  department: Department;
+  appointmentDate: Date;
+  startTime: Date;
+  endTime: Date;
+  mode: "online" | "physical";
+  status: "pending" | "successful" | "cancelled";
+  patientStatus: "pending" | "successful" | "cancelled";
+  doctorStatus: "pending" | "successful" | "cancelled";
+};
+
+export type BookAppointment = {
+  appointmentDate: string | Date;
+  startTime: string | Date;
+  endTime: string | Date;
+  mode: string;
+};
+
+export type AppointmentDocument = Appointment & {
+  _id: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+export type Consultation<T = DiagnosisDocument> = {
+  appointment: AppointmentDocument;
+  diagnosis: T;
+  diagnosisRef: DiagnosisRef;
+  consultationNote?: string;
 };
