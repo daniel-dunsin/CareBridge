@@ -11,6 +11,7 @@ import { KidneyMetrics, KidneyMetricsSchema } from './schemas/kidney.schema';
 import { LiverMetrics, LiverMetricsSchema } from './schemas/liver.schema';
 import { SkinMetrics, SkinMetricsSchema } from './schemas/skin.schema';
 import { TeethMetrics, TeethMetricsSchema } from './schemas/teeth.schema';
+import { Consultation } from '../appointment/schemas/consultation.schema';
 
 @Module({
   imports: [
