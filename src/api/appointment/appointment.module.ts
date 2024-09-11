@@ -6,6 +6,12 @@ import {
   ConsultationSchema,
 } from './schemas/consultation.schema';
 import { AppointmentStatus } from './enums';
+import { AppointmentController } from './controllers/appointment.controller';
+import { ConsultationController } from './controllers/consulation.controller';
+import { AppointmentService } from './services/appointment.service';
+import { AppointmentProvider } from './providers/appointment.provider';
+import { ConsultationProvider } from './providers/consultation.provider';
+import { ConsultationService } from './services/consulation.service';
 
 @Module({
   imports: [
@@ -46,7 +52,13 @@ import { AppointmentStatus } from './enums';
       },
     ]),
   ],
-  providers: [],
-  exports: [],
+  controllers: [AppointmentController, ConsultationController],
+  providers: [
+    AppointmentService,
+    AppointmentProvider,
+    ConsultationProvider,
+    ConsultationService,
+  ],
+  exports: [AppointmentService],
 })
 export class AppointmentModule {}

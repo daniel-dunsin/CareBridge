@@ -14,6 +14,9 @@ const auth_module_1 = require("./auth/auth.module");
 const token_module_1 = require("./token/token.module");
 const doctor_module_1 = require("./doctor/doctor.module");
 const patient_module_1 = require("./patient/patient.module");
+const diagnosis_module_1 = require("./diagnosis/diagnosis.module");
+const payment_module_1 = require("./payment/payment.module");
+const appointment_module_1 = require("./appointment/appointment.module");
 let ApiModule = class ApiModule {
 };
 exports.ApiModule = ApiModule;
@@ -26,6 +29,9 @@ exports.ApiModule = ApiModule = __decorate([
             token_module_1.TokenModule,
             doctor_module_1.DoctorModule,
             patient_module_1.PatientModule,
+            diagnosis_module_1.DiagnosisModule,
+            payment_module_1.PaymentModule,
+            appointment_module_1.AppointmentModule,
         ],
     })
 ], ApiModule);

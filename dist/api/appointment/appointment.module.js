@@ -12,6 +12,12 @@ const mongoose_1 = require("@nestjs/mongoose");
 const appointment_schema_1 = require("./schemas/appointment.schema");
 const consultation_schema_1 = require("./schemas/consultation.schema");
 const enums_1 = require("./enums");
+const appointment_controller_1 = require("./controllers/appointment.controller");
+const consulation_controller_1 = require("./controllers/consulation.controller");
+const appointment_service_1 = require("./services/appointment.service");
+const appointment_provider_1 = require("./providers/appointment.provider");
+const consultation_provider_1 = require("./providers/consultation.provider");
+const consulation_service_1 = require("./services/consulation.service");
 let AppointmentModule = class AppointmentModule {
 };
 exports.AppointmentModule = AppointmentModule;
@@ -49,8 +55,14 @@ exports.AppointmentModule = AppointmentModule = __decorate([
                 },
             ]),
         ],
-        providers: [],
-        exports: [],
+        controllers: [appointment_controller_1.AppointmentController, consulation_controller_1.ConsultationController],
+        providers: [
+            appointment_service_1.AppointmentService,
+            appointment_provider_1.AppointmentProvider,
+            consultation_provider_1.ConsultationProvider,
+            consulation_service_1.ConsultationService,
+        ],
+        exports: [appointment_service_1.AppointmentService],
     })
 ], AppointmentModule);
 //# sourceMappingURL=appointment.module.js.map
