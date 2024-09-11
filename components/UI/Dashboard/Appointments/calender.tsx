@@ -14,6 +14,7 @@ import useUserInfo from "@/lib/hooks/useUserInfo";
 import AppointmentInfoModal from "./modal/appointment-info";
 import { getAppointments } from "@/lib/services/appointment.service";
 import { mapAppointmentsToEvents } from "@/lib/utils/helpers";
+// import "./index";
 
 const locales = { "en-US": enUS };
 
@@ -77,10 +78,11 @@ const BigCalendar = () => {
         localizer={localizer}
         defaultDate={new Date()}
         defaultView="month"
-        events={events}
         style={{ height: "100vh" }}
+        events={events}
         onSelectEvent={handleSelectEvent}
         onSelectSlot={handleSelect}
+        // className="dark:bg-darkGray border-transparent dark:text-offWhite duration-300 rbc-today"
       />
     </div>
   );

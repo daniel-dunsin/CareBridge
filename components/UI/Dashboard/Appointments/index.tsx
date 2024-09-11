@@ -51,7 +51,7 @@ const Appointment = () => {
   }, [appointments]);
 
   return (
-    <div className="space-y-4 bg-white text-black">
+    <div className="space-y-4 bg-white text-black dark:bg-darkGray dark:text-offWhite">
       <div className="bg-white dark:bg-white/10 rounded-2xl border dark:border-white/10 p-5 flex items-center justify-between">
         <p>{format(new Date(), "MMMM, dd")}</p>
 

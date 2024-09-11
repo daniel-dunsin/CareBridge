@@ -1,0 +1,10 @@
+.rbc-today {
+  background-color: #ffe4b5 !important;
+  border: 2px solid #ff6347 !important;
+  border-radius: 4px;
+  color: #000;
+}
+
+.rbc-today .rbc-date-cell {
+  font-weight: bold;
+}
