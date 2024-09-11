@@ -78,12 +78,6 @@ export class DiagnosisService {
               },
             },
           },
-          {
-            path: 'prescription',
-            populate: {
-              path: 'medicines',
-            },
-          },
         ],
       },
     ]);
