@@ -18,6 +18,11 @@ const appointment_service_1 = require("./services/appointment.service");
 const appointment_provider_1 = require("./providers/appointment.provider");
 const consultation_provider_1 = require("./providers/consultation.provider");
 const consulation_service_1 = require("./services/consulation.service");
+const doctor_module_1 = require("../doctor/doctor.module");
+const patient_module_1 = require("../patient/patient.module");
+const shared_module_1 = require("../../shared/shared.module");
+const payment_module_1 = require("../payment/payment.module");
+const diagnosis_module_1 = require("../diagnosis/diagnosis.module");
 let AppointmentModule = class AppointmentModule {
 };
 exports.AppointmentModule = AppointmentModule;
@@ -54,6 +59,11 @@ exports.AppointmentModule = AppointmentModule = __decorate([
                     },
                 },
             ]),
+            doctor_module_1.DoctorModule,
+            patient_module_1.PatientModule,
+            shared_module_1.SharedModule,
+            (0, common_1.forwardRef)(() => payment_module_1.PaymentModule),
+            diagnosis_module_1.DiagnosisModule,
         ],
         controllers: [appointment_controller_1.AppointmentController, consulation_controller_1.ConsultationController],
         providers: [

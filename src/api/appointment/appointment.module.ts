@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Appointment, AppointmentSchema } from './schemas/appointment.schema';
 import {
@@ -12,6 +12,11 @@ import { AppointmentService } from './services/appointment.service';
 import { AppointmentProvider } from './providers/appointment.provider';
 import { ConsultationProvider } from './providers/consultation.provider';
 import { ConsultationService } from './services/consulation.service';
+import { DoctorModule } from '../doctor/doctor.module';
+import { PatientModule } from '../patient/patient.module';
+import { SharedModule } from 'src/shared/shared.module';
+import { PaymentModule } from '../payment/payment.module';
+import { DiagnosisModule } from '../diagnosis/diagnosis.module';
 
 @Module({
   imports: [
@@ -51,6 +56,11 @@ import { ConsultationService } from './services/consulation.service';
         },
       },
     ]),
+    DoctorModule,
+    PatientModule,
+    SharedModule,
+    forwardRef(() => PaymentModule),
+    DiagnosisModule,
   ],
   controllers: [AppointmentController, ConsultationController],
   providers: [
