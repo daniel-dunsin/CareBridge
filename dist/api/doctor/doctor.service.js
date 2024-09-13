@@ -35,10 +35,10 @@ let DoctorService = class DoctorService {
         return doctor;
     }
     async getDoctors(filter) {
-        const { search = '', ...match } = filter;
+        const { search = '' } = filter;
         const pipelines = [
             {
-                $match: match,
+                $match: filter,
             },
             {
                 $lookup: {

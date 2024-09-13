@@ -10,20 +10,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.WebhookService = void 0;
+const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
 const crypto = require("crypto");
 const enums_1 = require("../enums");
 const payment_service_1 = require("./payment.service");
 const mail_service_1 = require("../../../shared/mail/mail.service");
+const order_service_1 = require("../../order/order.service");
 const user_service_1 = require("../../user/user.service");
 const appointment_service_1 = require("../../appointment/services/appointment.service");
 const date_fns_1 = require("date-fns");
-const common_1 = require("@nestjs/common");
 let WebhookService = class WebhookService {
-    constructor(configService, paymentService, mailService, userService, appointmentService) {
+    constructor(configService, paymentService, mailService, orderService, userService, appointmentService) {
         this.configService = configService;
         this.paymentService = paymentService;
         this.mailService = mailService;
+        this.orderService = orderService;
         this.userService = userService;
         this.appointmentService = appointmentService;
     }
@@ -43,15 +45,39 @@ let WebhookService = class WebhookService {
         const reference = req.body.data.reference;
         switch (event) {
             case enums_1.WebhookEvents.TRANSACTION_SUCCESSFUL:
+                if (reference.startsWith('medicine-checkout')) {
+                    await this.successfulMedicinePurchase(req.body.data);
+                }
                 if (reference.startsWith('doctor-payment')) {
                     await this.successfulDoctorPayment(req.body.data);
                 }
                 break;
             case enums_1.WebhookEvents.TRANSACTION_FAILED:
+                if (reference.startsWith('medicine-checkout')) {
+                    await this.failedMedicinePurchase(req.body.data);
+                }
                 break;
             default:
                 throw new common_1.MethodNotAllowedException('Method not implemented!');
         }
+    }
+    async successfulMedicinePurchase(chargeResponse) {
+        const attempt = await this.paymentService.updatePaymentAttempt({ reference: chargeResponse.reference }, { status: enums_1.PaymentStatus.SUCCESSFUL });
+        if (!attempt)
+            throw new common_1.NotFoundException('transaction not found');
+        await this.orderService.createOrder({
+            ...attempt.metadata,
+            user: attempt.user,
+        });
+        const user = await this.userService.getUser({ _id: attempt.user });
+        await this.mailService.sendMail({
+            to: user?.email,
+            subject: 'Order Processed! 📦',
+            template: 'drugs-purchased',
+            context: {
+                firstName: user?.firstName,
+            },
+        });
     }
     async failedMedicinePurchase(chargeResponse) {
         const attempt = await this.paymentService.updatePaymentAttempt({
@@ -98,6 +124,7 @@ exports.WebhookService = WebhookService = __decorate([
     __metadata("design:paramtypes", [config_1.ConfigService,
         payment_service_1.PaymentService,
         mail_service_1.MailService,
+        order_service_1.OrderService,
         user_service_1.UserService,
         appointment_service_1.AppointmentService])
 ], WebhookService);

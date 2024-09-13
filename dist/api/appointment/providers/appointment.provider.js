@@ -74,9 +74,7 @@ let AppointmentProvider = class AppointmentProvider {
         if (!doctor.isAvailable) {
             throw new common_1.NotFoundException(`This doctor is not available at the moment`);
         }
-        const patient = await this.patientService.getPatient({
-            user: new mongoose_1.Types.ObjectId(user._id),
-        });
+        const patient = await this.patientService.getPatient({ user: new mongoose_1.Types.ObjectId(user._id) });
         if (!patient)
             throw new common_1.NotFoundException('Patient not found');
         await this.validatePatientAndDocAvailaibility(bookSessionDto, doctor._id, patient._id, true);
@@ -129,9 +127,7 @@ let AppointmentProvider = class AppointmentProvider {
         };
     }
     async getUserDoctorAppointments(userId) {
-        const doctor = await this.doctorService.getDoctor({
-            user: new mongoose_1.Types.ObjectId(userId),
-        });
+        const doctor = await this.doctorService.getDoctor({ user: new mongoose_1.Types.ObjectId(userId) });
         if (!doctor)
             throw new common_1.NotFoundException('Doctor not found');
         return await this.getDoctorAppointments(doctor._id);
@@ -156,35 +152,25 @@ let AppointmentProvider = class AppointmentProvider {
         }
     }
     async getUserPatientAppointments(userId) {
-        const patient = await this.patientService.getPatient({
-            user: new mongoose_1.Types.ObjectId(userId),
-        });
+        const patient = await this.patientService.getPatient({ user: new mongoose_1.Types.ObjectId(userId) });
         if (!patient)
             throw new common_1.NotFoundException('Patient not found');
         return await this.getPatientAppointments(patient._id);
     }
     async getUserPendingAppointments(user) {
-        const _query = {
-            status: enums_1.AppointmentStatus.PENDING,
-        };
+        const _query = { status: enums_1.AppointmentStatus.PENDING };
         if (user.role === enums_2.RoleNames.PATIENT) {
-            const patient = await this.patientService.getPatient({
-                user: new mongoose_1.Types.ObjectId(user._id),
-            });
+            const patient = await this.patientService.getPatient({ user: new mongoose_1.Types.ObjectId(user._id) });
             _query.patient = patient._id;
         }
         else if (user.role === enums_2.RoleNames.DOCTOR) {
-            const doctor = await this.doctorService.getDoctor({
-                user: new mongoose_1.Types.ObjectId(user._id),
-            });
+            const doctor = await this.doctorService.getDoctor({ user: new mongoose_1.Types.ObjectId(user._id) });
             _query.doctor = doctor._id;
         }
         return await this.appointmentService.getAppointments(_query);
     }
     async getAppointment(appointmentId) {
-        const data = await this.appointmentService.getAppointment({
-            _id: appointmentId,
-        });
+        const data = await this.appointmentService.getAppointment({ _id: appointmentId });
         if (!data)
             throw new common_1.NotFoundException('Appointment not found');
         return {
@@ -194,9 +180,7 @@ let AppointmentProvider = class AppointmentProvider {
         };
     }
     async rescheduleAppointment(sessionDto, appointmentId, user) {
-        const appointment = await this.appointmentService.getAppointment({
-            _id: appointmentId,
-        });
+        const appointment = await this.appointmentService.getAppointment({ _id: appointmentId });
         if (appointment.status != enums_1.AppointmentStatus.PENDING)
             throw new common_1.BadRequestException('Only pending appointments can be rescheduled');
         if (String(appointment.doctor.user._id) != String(user._id) &&
@@ -234,9 +218,7 @@ let AppointmentProvider = class AppointmentProvider {
         };
     }
     async cancelAppointment(appointmentId, user) {
-        const appointment = await this.appointmentService.getAppointment({
-            _id: appointmentId,
-        });
+        const appointment = await this.appointmentService.getAppointment({ _id: appointmentId });
         if (appointment.status != enums_1.AppointmentStatus.PENDING)
             throw new common_1.BadRequestException('Only pending appointments can be rescheduled');
         if (String(appointment.doctor.user._id) != String(user._id) &&
@@ -246,16 +228,10 @@ let AppointmentProvider = class AppointmentProvider {
         appointment.status = enums_1.AppointmentStatus.CANCELLED;
         await appointment.save();
         const triggeredByPatient = user.role === enums_2.RoleNames.PATIENT;
-        const triggerer = triggeredByPatient
-            ? appointment.patient.user
-            : appointment.doctor.user;
-        const receiver = triggeredByPatient
-            ? appointment.doctor.user
-            : appointment.patient.user;
+        const triggerer = triggeredByPatient ? appointment.patient.user : appointment.doctor.user;
+        const receiver = triggeredByPatient ? appointment.doctor.user : appointment.patient.user;
         await this.mailService.sendMail({
-            to: triggeredByPatient
-                ? appointment.doctor.user.email
-                : appointment.patient.user.email,
+            to: triggeredByPatient ? appointment.doctor.user.email : appointment.patient.user.email,
             subject: 'BDMeds: Cancelled Appoints',
             template: 'appointment-cancelled',
             context: {
@@ -272,9 +248,7 @@ let AppointmentProvider = class AppointmentProvider {
         };
     }
     async updateAppointmentStatus(status, appointmentId, user) {
-        const appointment = await this.appointmentService.getAppointment({
-            _id: appointmentId,
-        });
+        const appointment = await this.appointmentService.getAppointment({ _id: appointmentId });
         if (!appointment)
             throw new common_1.NotFoundException('Appointment not found');
         if (user.role === enums_2.RoleNames.PATIENT) {

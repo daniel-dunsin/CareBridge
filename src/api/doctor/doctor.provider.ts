@@ -4,6 +4,7 @@ import { FilterQuery, Types } from 'mongoose';
 import { UpdateDoctorDto } from './dto/update-doctor.dto';
 import { UserService } from '../user/user.service';
 import { KycDocsDto } from './dto/kyc-verification.dto';
+import { UtilService } from 'src/shared/services/utils.service';
 import { FileService } from 'src/shared/file/file.service';
 import { KycStatus } from './enums';
 import { MailService } from 'src/shared/mail/mail.service';
@@ -130,7 +131,7 @@ export class DoctorProvider {
 
     await this.mailService.sendMail({
       to: data.user.email,
-      subject: 'CareBridge: KYC Verification Successful',
+      subject: 'BDMeds: KYC Verification Successful',
       template: 'kyc-verification-successful',
       context: {
         firstName: data.user?.firstName,
@@ -152,7 +153,7 @@ export class DoctorProvider {
 
     await this.mailService.sendMail({
       to: data.user.email,
-      subject: 'CareBridge: KYC Verification Failed',
+      subject: 'BDMeds: KYC Verification Failed',
       template: 'kyc-verification-failed',
       context: {
         firstName: data.user?.firstName,

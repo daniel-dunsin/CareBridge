@@ -10,7 +10,7 @@ export class MailService {
     const { to, template, context, subject } = dto;
     try {
       await this.mailerService.sendMail({
-        from: 'noreply@CareBridge.com',
+        from: 'noreply@bdmeds.com',
         to,
         subject,
         template,

@@ -14,76 +14,76 @@ import { TeethMetrics, TeethMetricsSchema } from './schemas/teeth.schema';
 import { Consultation } from '../appointment/schemas/consultation.schema';
 
 @Module({
-  imports: [
-    MongooseModule.forFeatureAsync([
-      {
-        name: BoneMetrics.name,
-        useFactory() {
-          const schema = BoneMetricsSchema;
+   imports: [
+      MongooseModule.forFeatureAsync([
+         {
+            name: BoneMetrics.name,
+            useFactory() {
+               const schema = BoneMetricsSchema;
 
-          return schema;
-        },
-      },
-      {
-        name: BrainMetrics.name,
-        useFactory() {
-          const schema = BrainMetricsSchema;
+               return schema;
+            },
+         },
+         {
+            name: BrainMetrics.name,
+            useFactory() {
+               const schema = BrainMetricsSchema;
 
-          return schema;
-        },
-      },
-      {
-        name: EyesMetrics.name,
-        useFactory() {
-          const schema = EyesMetricsSchema;
+               return schema;
+            },
+         },
+         {
+            name: EyesMetrics.name,
+            useFactory() {
+               const schema = EyesMetricsSchema;
 
-          return schema;
-        },
-      },
-      {
-        name: HeartMetrics.name,
-        useFactory() {
-          const schema = HeartMetricsSchema;
+               return schema;
+            },
+         },
+         {
+            name: HeartMetrics.name,
+            useFactory() {
+               const schema = HeartMetricsSchema;
 
-          return schema;
-        },
-      },
-      {
-        name: KidneyMetrics.name,
-        useFactory() {
-          const schema = KidneyMetricsSchema;
+               return schema;
+            },
+         },
+         {
+            name: KidneyMetrics.name,
+            useFactory() {
+               const schema = KidneyMetricsSchema;
 
-          return schema;
-        },
-      },
-      {
-        name: LiverMetrics.name,
-        useFactory() {
-          const schema = LiverMetricsSchema;
+               return schema;
+            },
+         },
+         {
+            name: LiverMetrics.name,
+            useFactory() {
+               const schema = LiverMetricsSchema;
 
-          return schema;
-        },
-      },
-      {
-        name: SkinMetrics.name,
-        useFactory() {
-          const schema = SkinMetricsSchema;
+               return schema;
+            },
+         },
+         {
+            name: SkinMetrics.name,
+            useFactory() {
+               const schema = SkinMetricsSchema;
 
-          return schema;
-        },
-      },
-      {
-        name: TeethMetrics.name,
-        useFactory() {
-          const schema = TeethMetricsSchema;
+               return schema;
+            },
+         },
+         {
+            name: TeethMetrics.name,
+            useFactory() {
+               const schema = TeethMetricsSchema;
 
-          return schema;
-        },
-      },
-    ]),
-  ],
-  providers: [DiagnosisProvider, DiagnosisService],
-  controllers: [DiagnosisController],
-  exports: [DiagnosisService],
+               return schema;
+            },
+         },
+      ]),
+   ],
+   providers: [DiagnosisProvider, DiagnosisService],
+   controllers: [DiagnosisController],
+   exports: [DiagnosisService],
 })
 export class DiagnosisModule {}

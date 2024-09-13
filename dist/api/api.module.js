@@ -15,8 +15,11 @@ const token_module_1 = require("./token/token.module");
 const doctor_module_1 = require("./doctor/doctor.module");
 const patient_module_1 = require("./patient/patient.module");
 const diagnosis_module_1 = require("./diagnosis/diagnosis.module");
-const payment_module_1 = require("./payment/payment.module");
 const appointment_module_1 = require("./appointment/appointment.module");
+const video_module_1 = require("./video/video.module");
+const medicine_module_1 = require("./medicine/medicine.module");
+const order_module_1 = require("./order/order.module");
+const payment_module_1 = require("./payment/payment.module");
 let ApiModule = class ApiModule {
 };
 exports.ApiModule = ApiModule;
@@ -30,8 +33,11 @@ exports.ApiModule = ApiModule = __decorate([
             doctor_module_1.DoctorModule,
             patient_module_1.PatientModule,
             diagnosis_module_1.DiagnosisModule,
-            payment_module_1.PaymentModule,
             appointment_module_1.AppointmentModule,
+            video_module_1.VideoModule,
+            medicine_module_1.MedicineModule,
+            order_module_1.OrderModule,
+            payment_module_1.PaymentModule,
         ],
     })
 ], ApiModule);

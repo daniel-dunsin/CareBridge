@@ -17,6 +17,7 @@ const paystack_provider_1 = require("./providers/paystack.provider");
 const mongoose_1 = require("@nestjs/mongoose");
 const payment_attempt_schema_1 = require("./schemas/payment.attempt.schema");
 const shared_module_1 = require("../../shared/shared.module");
+const order_module_1 = require("../order/order.module");
 const user_module_1 = require("../user/user.module");
 const appointment_module_1 = require("../appointment/appointment.module");
 let PaymentModule = class PaymentModule {
@@ -32,17 +33,12 @@ exports.PaymentModule = PaymentModule = __decorate([
                 },
             ]),
             shared_module_1.SharedModule,
+            (0, common_1.forwardRef)(() => order_module_1.OrderModule),
             (0, common_1.forwardRef)(() => appointment_module_1.AppointmentModule),
             user_module_1.UserModule,
         ],
         controllers: [payment_controller_1.PaymentController],
-        providers: [
-            payment_provider_1.PaymentProvider,
-            payment_service_1.PaymentService,
-            webhooks_service_1.WebhookService,
-            paystack_service_1.PaystackService,
-            paystack_provider_1.PaystackProvider,
-        ],
+        providers: [payment_provider_1.PaymentProvider, payment_service_1.PaymentService, webhooks_service_1.WebhookService, paystack_service_1.PaystackService, paystack_provider_1.PaystackProvider],
         exports: [payment_service_1.PaymentService, paystack_service_1.PaystackService],
     })
 ], PaymentModule);

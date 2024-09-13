@@ -41,10 +41,10 @@ export class DoctorService {
   }
 
   async getDoctors(filter: FilterQuery<DoctorDocument> & { search?: string }) {
-    const { search = '', ...match } = filter;
+    const { search = '' } = filter;
     const pipelines: PipelineStage[] = [
       {
-        $match: match,
+        $match: filter,
       },
       {
         $lookup: {

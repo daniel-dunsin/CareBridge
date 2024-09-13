@@ -81,7 +81,7 @@ let AuthService = class AuthService {
         const link = `${this.configService.get('FRONTEND_URL')}/account/verify?email=${token.email}&token=${token.value}`;
         await this.mailService.sendMail({
             to: user.email,
-            subject: 'CareBridge: Account Verification',
+            subject: 'BdMeds: Account Verification',
             template: 'account-verification',
             context: {
                 firstName: user.firstName,
@@ -142,7 +142,7 @@ let AuthService = class AuthService {
         const link = `${this.configService.get('FRONTEND_URL')}/account/verify?email=${token.email}&token=${token.value}`;
         await this.mailService.sendMail({
             to: user.email,
-            subject: 'CareBridge: Account Verification',
+            subject: 'BdMeds: Account Verification',
             template: 'account-verification',
             context: {
                 firstName: user.firstName,
@@ -165,7 +165,7 @@ let AuthService = class AuthService {
             const link = `${this.configService.get('FRONTEND_URL')}/reset-password?email=${token.email}&token=${token.value}`;
             await this.mailService.sendMail({
                 to: user.email,
-                subject: 'CareBridge: Password Reset Request',
+                subject: 'BdMeds: Password Reset Request',
                 template: 'forgot-password',
                 context: {
                     firstName: user.firstName,

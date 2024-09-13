@@ -101,7 +101,7 @@ let DoctorProvider = class DoctorProvider {
         await this.doctorService.updateKyc({ status: enums_1.KycStatus.SUCCESSFUL }, doctorId);
         await this.mailService.sendMail({
             to: data.user.email,
-            subject: 'CareBridge: KYC Verification Successful',
+            subject: 'BDMeds: KYC Verification Successful',
             template: 'kyc-verification-successful',
             context: {
                 firstName: data.user?.firstName,
@@ -117,7 +117,7 @@ let DoctorProvider = class DoctorProvider {
         await this.doctorService.updateKyc({ status: enums_1.KycStatus.FAILED }, doctorId);
         await this.mailService.sendMail({
             to: data.user.email,
-            subject: 'CareBridge: KYC Verification Failed',
+            subject: 'BDMeds: KYC Verification Failed',
             template: 'kyc-verification-failed',
             context: {
                 firstName: data.user?.firstName,

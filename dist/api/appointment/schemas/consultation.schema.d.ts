@@ -1,6 +1,7 @@
 import { HydratedDocument, Types } from 'mongoose';
 import { AppointmentDocument } from './appointment.schema';
 import { DiagnosisDocument } from '../types';
+import { MedicineDocument } from 'src/api/medicine/schemas/medicine.schema';
 export declare class Consultation {
     appointment: AppointmentDocument;
     diagnosis: DiagnosisDocument;
@@ -8,6 +9,10 @@ export declare class Consultation {
     consultationNote: string;
     treatmentPlan: string;
     symptoms: string;
+    prescription: {
+        medicines: Array<MedicineDocument | string>;
+        prescriptionNote: string;
+    };
 }
 export type ConsultationDocument = HydratedDocument<Consultation>;
 export declare const ConsultationSchema: import("mongoose").Schema<Consultation, import("mongoose").Model<Consultation, any, any, any, import("mongoose").Document<unknown, any, Consultation> & Consultation & {

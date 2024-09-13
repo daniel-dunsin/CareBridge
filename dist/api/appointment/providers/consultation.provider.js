@@ -42,6 +42,7 @@ let ConsultationProvider = class ConsultationProvider {
                 patientName: appointment.patient.user.firstName,
                 doctorName: appointment.doctor.user.firstName,
                 department: appointment.department,
+                prescription: consultation.prescription,
             },
         });
         diagnosis.consultation = String(consultation._id);

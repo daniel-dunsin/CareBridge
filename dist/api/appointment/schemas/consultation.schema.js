@@ -15,6 +15,7 @@ const mongoose_2 = require("mongoose");
 const db_const_1 = require("../../../shared/constants/db.const");
 const appointment_schema_1 = require("./appointment.schema");
 const enums_1 = require("../enums");
+const medicine_schema_1 = require("../../medicine/schemas/medicine.schema");
 let Consultation = class Consultation {
 };
 exports.Consultation = Consultation;
@@ -42,6 +43,25 @@ __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", String)
 ], Consultation.prototype, "symptoms", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({
+        type: {
+            medicines: {
+                type: [
+                    {
+                        type: mongoose_2.Types.ObjectId,
+                        ref: medicine_schema_1.Medicine.name,
+                    },
+                ],
+            },
+            prescriptionNote: {
+                type: String,
+            },
+        },
+        required: false,
+    }),
+    __metadata("design:type", Object)
+], Consultation.prototype, "prescription", void 0);
 exports.Consultation = Consultation = __decorate([
     (0, mongoose_1.Schema)(db_const_1.schemaOptions)
 ], Consultation);

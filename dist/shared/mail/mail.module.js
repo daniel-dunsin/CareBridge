@@ -32,7 +32,7 @@ exports.MailModule = MailModule = __decorate([
                             },
                         },
                         defaults: {
-                            from: 'No Reply <noreply@CareBridge.com>',
+                            from: 'No Reply <noreply@bdmeds.com>',
                         },
                         template: {
                             dir: (0, path_1.join)(process.cwd(), 'src/shared/mail/templates'),
