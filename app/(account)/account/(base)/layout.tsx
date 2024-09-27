@@ -1,12 +1,20 @@
+"use client";
+import authOptions from "@/lib/config/auth-options";
 import { getServerSession } from "next-auth";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { BiHealth } from "react-icons/bi";
 
-const Layout = async ({ children }: { children: React.ReactNode }) => {
-  const session = await getServerSession();
+const Layout = ({ children }: { children: React.ReactNode }) => {
+  const { data: session } = useSession();
 
-  if (session) redirect("/dashboard");
+  const router = useRouter();
+
+  useEffect(() => {
+    if (session) router.replace("/dashboard");
+  }, []);
 
   return (
     <main>
