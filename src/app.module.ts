@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { SharedModule } from 'src/shared/shared.module';
 import { envSchema } from './shared/schemas/env.schema';
 import { ApiModule } from './api/api.module';
+import { AIModule } from './api/ai/ai.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { ApiModule } from './api/api.module';
     }),
     SharedModule,
     ApiModule,
+    AIModule,
   ],
   controllers: [],
   providers: [],
