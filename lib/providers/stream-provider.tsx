@@ -31,7 +31,12 @@ const StreamVideoProvider = ({ children }: { children: ReactNode }) => {
     setVideoClient(client);
   }, [status, session]);
 
-  if (!videoClient) return <Loader />;
+  if (!videoClient)
+    return (
+      <div className="fixed top-0 w-full h-full left-0 z-[10000] backdrop-blur-md grid place-content-center">
+        <Loader />
+      </div>
+    );
 
   return <StreamVideo client={videoClient}>{children}</StreamVideo>;
 };

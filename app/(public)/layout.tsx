@@ -1,3 +1,4 @@
+"use client";
 import Cursor from "@/components/Common/Cursor";
 import Footer from "@/components/Layout/Footer";
 import Navbar from "@/components/Layout/Navbar";
