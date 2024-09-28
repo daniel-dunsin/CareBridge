@@ -12,6 +12,7 @@ const config_1 = require("@nestjs/config");
 const shared_module_1 = require("./shared/shared.module");
 const env_schema_1 = require("./shared/schemas/env.schema");
 const api_module_1 = require("./api/api.module");
+const ai_module_1 = require("./api/ai/ai.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -25,6 +26,7 @@ exports.AppModule = AppModule = __decorate([
             }),
             shared_module_1.SharedModule,
             api_module_1.ApiModule,
+            ai_module_1.AIModule,
         ],
         controllers: [],
         providers: [],

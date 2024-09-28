@@ -16,5 +16,7 @@ exports.envSchema = Joi.object({
     ZOOM_ACCOUNT_ID: Joi.string().required(),
     ZOOM_CLIENT_SECRET: Joi.string().required(),
     PAYSTACK_SECRET_KEY: Joi.string().required(),
+    OPEN_AI_API_KEY: Joi.string().required(),
+    ASSEMBLY_AI_API_KEY: Joi.string().required(),
 });
 //# sourceMappingURL=env.schema.js.map

@@ -8,33 +8,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MailService = void 0;
+exports.AIService = void 0;
 const common_1 = require("@nestjs/common");
-const mailer_1 = require("@nestjs-modules/mailer");
-let MailService = class MailService {
-    constructor(mailerService) {
-        this.mailerService = mailerService;
-    }
-    async sendMail(dto) {
-        const { to, template, context, subject } = dto;
-        try {
-            await this.mailerService.sendMail({
-                from: 'noreply@CareBridge.com',
-                to,
-                subject,
-                template,
-                context,
-            });
-        }
-        catch (error) {
-            throw new common_1.BadRequestException(error);
-        }
+const ai_provider_1 = require("./ai.provider");
+const openai_1 = require("openai");
+const assemblyai_1 = require("assemblyai");
+let AIService = class AIService {
+    constructor(openai, assemblyai) {
+        this.openai = openai;
+        this.assemblyai = assemblyai;
     }
 };
-exports.MailService = MailService;
-exports.MailService = MailService = __decorate([
+exports.AIService = AIService;
+exports.AIService = AIService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [mailer_1.MailerService])
-], MailService);
-//# sourceMappingURL=mail.service.js.map
+    __param(0, (0, common_1.Inject)(ai_provider_1.OPEN_AI_PROVIDER)),
+    __param(1, (0, common_1.Inject)(ai_provider_1.ASSEMBLY_AI_PROVIDER)),
+    __metadata("design:paramtypes", [openai_1.default,
+        assemblyai_1.AssemblyAI])
+], AIService);
+//# sourceMappingURL=ai.service.js.map
