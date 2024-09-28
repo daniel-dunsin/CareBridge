@@ -48,7 +48,7 @@ export class ConsultationProvider {
 
     await this.mailService.sendMail({
       to: appointment.patient.user.email,
-      subject: `BdMeds: Dr. ${appointment.doctor.user.firstName} Consultation Report`,
+      subject: `CareBridge: Dr. ${appointment.doctor.user.firstName} Consultation Report`,
       template: 'consultation-report-submitted',
       context: {
         patientName: appointment.patient.user.firstName,
