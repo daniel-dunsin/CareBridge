@@ -9,9 +9,9 @@ import Doctors from "./content/doctors";
 import Notifications from "./content/notifications";
 import Payments from "./content/payments";
 import useUserInfo from "@/lib/hooks/useUserInfo";
-import Reviews from "./content/reviews";
 import Kyc from "./content/kyc";
 import { useTheme } from "@/lib/store/global.store";
+import React from "react";
 
 const Settings = () => {
   const searchParams = useSearchParams();

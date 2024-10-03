@@ -11,11 +11,15 @@ import { useTheme } from "@/lib/store/global.store";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
 import { IoIosCloseCircle } from "react-icons/io";
 import { signOut } from "next-auth/react";
+import { GoHome } from "react-icons/go";
+import { useRouter } from "next/navigation";
 
 const NavProfileModal = () => {
   const { hideModal } = useModal();
   const { user, loading } = useUserInfo();
   const { isDark: isDarkMode } = useTheme();
+
+  const router = useRouter();
 
   return (
     <Modal onClose={hideModal}>
@@ -61,7 +65,14 @@ const NavProfileModal = () => {
           </div>
         </div>
 
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center gap-2">
+          <button
+            className="flex items-center gap-2 dark:text-[#919191] dark:hover:text-red-500 duration-200"
+            onClick={() => (router.push("/"), hideModal())}
+          >
+            <GoHome />
+            <span>Home</span>
+          </button>
           <button
             className="flex items-center gap-2 dark:text-[#919191] dark:hover:text-red-500 duration-200"
             onClick={() => signOut()}

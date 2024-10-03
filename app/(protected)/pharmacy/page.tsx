@@ -8,7 +8,7 @@ const Page = () => {
     <div className="h-screen -mt-20 flex items-center justify-center">
       <div className="space-y-10">
         <div className="grid place-content-center">
-          <Image src={"/images/pharmacy.svg"} alt="pharmacy" width={400} height={400} />
+          <Image src={"/svgs/pharmacy.svg"} alt="pharmacy" width={400} height={400} />
         </div>
 
         <div className="grid place-content-center">

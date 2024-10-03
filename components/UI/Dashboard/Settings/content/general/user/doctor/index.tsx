@@ -12,6 +12,7 @@ import Button from "@/components/Common/Button";
 import { useModal } from "@/lib/providers/modal-provider";
 import ProfileImageModal from "../../../../modals/profile-image-modal";
 import { useTheme } from "@/lib/store/global.store";
+import React from "react";
 
 type Tab = "info" | "reviews" | "settings";
 

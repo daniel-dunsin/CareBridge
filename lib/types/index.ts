@@ -174,3 +174,36 @@ export type Consultation<T = DiagnosisDocument> = {
   diagnosisRef: DiagnosisRef;
   consultationNote?: string;
 };
+
+export type KycGet = {
+  doctor: IDoctor;
+  idDoc: string;
+  idDocPublicId: string;
+  idType: KycID;
+  professionalCert: string;
+  status?: "pending" | "failed" | "successful";
+  createdAt: string;
+  updatedAt: string;
+  id: string;
+};
+
+// ADMIN
+export type Visibility = "published" | "scheduled" | "hidden";
+
+export type Medicine = {
+  _id: string;
+  name: string;
+  description: string;
+  price: number;
+  stock: number;
+  image: string;
+  visibility: Visibility;
+};
+
+export type CreateMedicine = {
+  name: string;
+  description: string;
+  amount: number;
+  stock: number;
+  image: string;
+};

@@ -22,6 +22,7 @@ import { useRouter } from "next/navigation";
 import { bookAppointment } from "@/lib/services/appointment.service";
 import { useAppointment } from "@/lib/store/event.store";
 import { CgArrowLeft, CgClose } from "react-icons/cg";
+import React from "react";
 
 type Inputs = {
   appointmentDate: string;
@@ -41,12 +42,17 @@ const AppointmentModal = () => {
 
   const [infoComplete, setInfoComplete] = useState(false);
   const [mode, setMode] = useState<"online" | "physical">("online");
+  const [department, setDepartment] = useState<Department>("Cardiology (Heart)");
+  const [search, setSearch] = useState("");
+  const [doctorId, setDoctorId] = useState("");
 
   const { update: updateAppointment, appointment } = useAppointment();
 
   const {
     register,
     handleSubmit,
+    watch,
+    setValue,
     formState: { isValid },
   } = useForm<Inputs>({
     defaultValues: {
@@ -56,12 +62,7 @@ const AppointmentModal = () => {
     },
   });
 
-  // specialization
-  const [department, setDepartment] = useState<Department>("Cardiology (Heart)");
-
-  const [search, setSearch] = useState("");
-
-  const [doctorId, setDoctorId] = useState("");
+  const startTime = watch("startTime");
 
   const {
     data: doctors,
@@ -79,6 +80,18 @@ const AppointmentModal = () => {
   }, [department]);
 
   const updateDepartment = (value: Department) => setDepartment(value);
+
+  useEffect(() => {
+    if (startTime) {
+      // Parse the start time and add one hour to it
+      const [hours, minutes] = startTime.split(":").map(Number);
+      const newHours = (hours + 1) % 24; // Ensure the time stays within 24 hours
+      const formattedEndTime = `${String(newHours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`;
+
+      // Update the endTime field
+      setValue("endTime", formattedEndTime);
+    }
+  }, [startTime, setValue]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -127,7 +140,7 @@ const AppointmentModal = () => {
             predicate: (query) => query.queryKey.includes("appointments"),
           }),
           hideModal(),
-          console.log(data?.data),
+          // console.log(data?.data),
           data?.data && (window.location.href = data?.data as string)
         ),
       }
@@ -174,7 +187,8 @@ const AppointmentModal = () => {
                   <input
                     type="date"
                     {...register("appointmentDate", { required: true })}
-                    className="w-full border dark:border-white/10 rounded-xl p-2 dark:bg-dark"
+                    className="w-full border dark:border-white/10 rounded-xl p-2 dark:bg-dark cursor-not-allowed"
+                    disabled
                   />
                 </div>
                 <div className="space-y-1">
@@ -190,7 +204,8 @@ const AppointmentModal = () => {
                   <input
                     type="time"
                     {...register("endTime", { required: true })}
-                    className="w-full border dark:border-white/10 rounded-xl p-2 dark:bg-dark"
+                    className="w-full border dark:border-white/10 rounded-xl p-2 dark:bg-dark disabled:opacity-80 cursor-not-allowed"
+                    disabled
                   />
                 </div>
 
