@@ -19,6 +19,7 @@ const swagger_1 = require("@nestjs/swagger");
 const upload_config_1 = require("./configs/upload-config");
 const ai_service_1 = require("./ai.service");
 const dto_1 = require("./dto");
+const auth_decorators_1 = require("../../shared/decorators/auth.decorators");
 let AIController = class AIController {
     constructor(aiService) {
         this.aiService = aiService;
@@ -45,6 +46,7 @@ __decorate([
             },
         },
     }),
+    (0, auth_decorators_1.IsPublic)(),
     __param(0, (0, common_1.UploadedFile)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
@@ -52,6 +54,7 @@ __decorate([
 ], AIController.prototype, "transcribeCall", null);
 __decorate([
     (0, common_1.Post)('generate-summary'),
+    (0, auth_decorators_1.IsPublic)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [dto_1.GenerateSummaryDto]),

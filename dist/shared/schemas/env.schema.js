@@ -18,5 +18,6 @@ exports.envSchema = Joi.object({
     PAYSTACK_SECRET_KEY: Joi.string().required(),
     OPEN_AI_API_KEY: Joi.string().required(),
     ASSEMBLY_AI_API_KEY: Joi.string().required(),
+    GEMINI_AI_API_KEY: Joi.string().required(),
 });
 //# sourceMappingURL=env.schema.js.map

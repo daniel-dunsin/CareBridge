@@ -12,13 +12,14 @@ const config_1 = require("@nestjs/config");
 const ai_controller_1 = require("./ai.controller");
 const ai_provider_1 = require("./ai.provider");
 const ai_service_1 = require("./ai.service");
+const shared_module_1 = require("../../shared/shared.module");
 let AIModule = class AIModule {
 };
 exports.AIModule = AIModule;
 exports.AIModule = AIModule = __decorate([
     (0, common_1.Module)({
-        imports: [config_1.ConfigModule],
-        providers: [ai_provider_1.OpenAIProvider, ai_provider_1.AssemblyAiProvider, ai_service_1.AIService],
+        imports: [config_1.ConfigModule, shared_module_1.SharedModule],
+        providers: [ai_provider_1.OpenAIProvider, ai_provider_1.AssemblyAiProvider, ai_provider_1.GeminiAIProvider, ai_service_1.AIService],
         controllers: [ai_controller_1.AIController],
     })
 ], AIModule);

@@ -1,9 +1,13 @@
 import OpenAI from 'openai';
 import { AssemblyAI, Transcript } from 'assemblyai';
+import { FileService } from 'src/shared/file/file.service';
+import { GenerativeModel } from '@google/generative-ai';
 export declare class AIService {
     private readonly openai;
     private readonly assemblyai;
-    constructor(openai: OpenAI, assemblyai: AssemblyAI);
+    private readonly geminiai;
+    private readonly fileService;
+    constructor(openai: OpenAI, assemblyai: AssemblyAI, geminiai: GenerativeModel, fileService: FileService);
     private SUMMARIZER_QUERY;
     transcribeCall(file: Express.Multer.File): Promise<{
         message: string;

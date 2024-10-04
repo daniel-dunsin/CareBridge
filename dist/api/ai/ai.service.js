@@ -17,17 +17,24 @@ const common_1 = require("@nestjs/common");
 const ai_provider_1 = require("./ai.provider");
 const openai_1 = require("openai");
 const assemblyai_1 = require("assemblyai");
+const file_service_1 = require("../../shared/file/file.service");
+const generative_ai_1 = require("@google/generative-ai");
 let AIService = class AIService {
-    constructor(openai, assemblyai) {
+    constructor(openai, assemblyai, geminiai, fileService) {
         this.openai = openai;
         this.assemblyai = assemblyai;
+        this.geminiai = geminiai;
+        this.fileService = fileService;
     }
     SUMMARIZER_QUERY(transcript) {
-        return `Summarize the following doctor-patient appointment video call transcript. The summary should include the key points discussed, the patient's symptoms, the doctor's diagnosis or advice, any medications prescribed, follow-up recommendations, and other important details. Format the summary clearly under headings such as 'Patient Details,' 'Symptoms,' 'Diagnosis,' 'Medications/Prescriptions,' and 'Follow-up Actions.' Ensure the summary is concise but covers all critical information. Here is the transcript:\n\n${transcript}`;
+        return `Summarize the following doctor-patient appointment video call transcript. The summary should include the key points discussed, like, the patient's symptoms, the doctor's diagnosis or advice, any medications prescribed, follow-up recommendations, and other important details. Format the summary clearly under headings such as 'Symptoms,' 'Diagnosis,' 'Medications/Prescriptions,' and 'Follow-up Actions.' Ensure the summary is concise but covers all critical information. Here is the transcript:\n\n${transcript}`;
     }
     async transcribeCall(file) {
+        const { url } = await this.fileService.uploadResource(file.path, {
+            resource_type: 'video',
+        });
         const transacript = await this.assemblyai.transcripts.transcribe({
-            audio: file.path,
+            audio: url,
             speaker_labels: true,
             format_text: true,
         });
@@ -79,26 +86,9 @@ let AIService = class AIService {
     async summarizeVideoCall(transcriptionId) {
         const { data: transcript } = await this.pollTranscription(transcriptionId);
         const speakerFormattedTranscript = await this.formatTranscript(transcript);
-        const { choices } = await this.openai.chat.completions.create({
-            model: 'gpt-4o',
-            messages: [
-                {
-                    role: 'system',
-                    content: 'You are an assistant that summarizes doctor-patient video call transcripts.',
-                },
-                {
-                    role: 'user',
-                    content: `${this.SUMMARIZER_QUERY(speakerFormattedTranscript)}`,
-                },
-            ],
-            max_tokens: 150,
-            temperature: 0.8,
-        });
-        if (choices.length == 0) {
-            throw new common_1.BadRequestException('Unable to generate summary');
-        }
+        const { response } = await this.geminiai.generateContent(this.SUMMARIZER_QUERY(speakerFormattedTranscript));
         const data = {
-            summary: choices[0].message.content,
+            summary: response.text(),
         };
         return {
             success: true,
@@ -112,7 +102,10 @@ exports.AIService = AIService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, common_1.Inject)(ai_provider_1.OPEN_AI_PROVIDER)),
     __param(1, (0, common_1.Inject)(ai_provider_1.ASSEMBLY_AI_PROVIDER)),
+    __param(2, (0, common_1.Inject)(ai_provider_1.GEMINI_AI_PROVIDER)),
     __metadata("design:paramtypes", [openai_1.default,
-        assemblyai_1.AssemblyAI])
+        assemblyai_1.AssemblyAI,
+        generative_ai_1.GenerativeModel,
+        file_service_1.FileService])
 ], AIService);
 //# sourceMappingURL=ai.service.js.map

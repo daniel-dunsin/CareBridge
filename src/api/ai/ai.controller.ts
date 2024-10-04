@@ -10,6 +10,7 @@ import { ApiBearerAuth, ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { MULTER_DISK_STORAGE } from './configs/upload-config';
 import { AIService } from './ai.service';
 import { GenerateSummaryDto } from './dto';
+import { IsPublic } from 'src/shared/decorators/auth.decorators';
 
 @Controller('ai')
 @ApiTags('ai')
@@ -30,11 +31,13 @@ export class AIController {
       },
     },
   })
+  @IsPublic()
   async transcribeCall(@UploadedFile() file: Express.Multer.File) {
     return await this.aiService.transcribeCall(file);
   }
 
   @Post('generate-summary')
+  @IsPublic()
   async generateSummary(@Body() generateSummaryDto: GenerateSummaryDto) {
     return await this.aiService.summarizeVideoCall(
       generateSummaryDto.transcriptionId,
