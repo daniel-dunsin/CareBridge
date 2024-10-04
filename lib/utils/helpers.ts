@@ -49,3 +49,7 @@ export const formatNaira = (price: number) => {
     style: "currency",
   }).format(price);
 };
+
+export const formatDefault = (num: number) => {
+  return new Intl.NumberFormat(undefined, {}).format(num);
+};

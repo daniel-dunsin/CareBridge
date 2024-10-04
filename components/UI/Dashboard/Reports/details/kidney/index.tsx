@@ -13,7 +13,7 @@ type Props = {
   report?: KidneyMetrics;
 };
 
-const KidneyModel = dynamic(() => import("@/components/Common/3D/kidney"), {
+const KidneyModel = dynamic(() => import("@/components/Common/Models/kidney"), {
   ssr: false,
   loading: () => (
     <div className="grid place-content-center min-h-[10rem] text-center">

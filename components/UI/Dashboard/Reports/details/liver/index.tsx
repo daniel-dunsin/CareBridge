@@ -2,10 +2,10 @@ import Loader from "@/components/Common/Loaders";
 import { parentVariant } from "@/lib/utils/variants";
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
-import { EyesMetrics, LiverMetrics } from "@/lib/types/reports";
+import { LiverMetrics } from "@/lib/types/reports";
 import { FC } from "react";
-import { TbHeartRateMonitor } from "react-icons/tb";
-import { RiHeartAddLine, RiHeartLine, RiHeartPulseLine } from "react-icons/ri";
+import {} from "react-icons/tb";
+import { RiHeartLine } from "react-icons/ri";
 import { FaEye } from "react-icons/fa";
 import { GiLiver } from "react-icons/gi";
 
@@ -13,7 +13,7 @@ type Props = {
   report?: LiverMetrics;
 };
 
-const LiverModel = dynamic(() => import("@/components/Common/3D/liver"), {
+const LiverModel = dynamic(() => import("@/components/Common/Models/liver"), {
   ssr: false,
   loading: () => (
     <div className="grid place-content-center min-h-[10rem] text-center">

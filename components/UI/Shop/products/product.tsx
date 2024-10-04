@@ -2,7 +2,7 @@ import { useModal } from "@/lib/providers/modal-provider";
 import Image from "next/image";
 import ProductModal from "./modal/product-modal";
 import { Medicine } from "@/lib/types";
-import { formatNaira } from "@/lib/helpers/numbers";
+import { formatNaira } from "@/lib/utils/helpers";
 
 const Product = (data: Medicine) => {
   const { showModal } = useModal();

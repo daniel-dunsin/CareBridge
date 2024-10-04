@@ -18,6 +18,7 @@ import Button from "@/components/Common/Button";
 import { useModal } from "@/lib/providers/modal-provider";
 import PrescriptionModal from "./_modal/prescription-modal";
 import useUserInfo from "@/lib/hooks/useUserInfo";
+import React from "react";
 
 const ReportsDetails = () => {
   const { push } = useRouter();
@@ -78,7 +79,7 @@ const ReportsDetails = () => {
         component = <BoneReportDetail report={report} />;
         break;
       default:
-        component = <></>;
+        component = null;
     }
 
     return (
@@ -91,12 +92,13 @@ const ReportsDetails = () => {
 
           {user && user.role !== "doctor" && (
             <Button
-              text="View Prescriptions"
               variant="filled"
               size="extra-small"
               onClick={() => showModal(<PrescriptionModal />)}
-              rounded="full"
-            />
+              className="rounded-full"
+            >
+              View Prescriptions
+            </Button>
           )}
         </div>
 

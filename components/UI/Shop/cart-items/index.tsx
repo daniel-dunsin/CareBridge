@@ -1,11 +1,9 @@
 "use client";
 
 import { getSingleMedicine } from "@/lib/services/medicine.service";
-import useCart from "@/lib/store/cart.store";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import CartItemSkeleton from "./skeleton";
-import { formatNaira } from "@/lib/helpers/numbers";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { PiTrashThin } from "react-icons/pi";
 import Button from "@/components/Common/Button";
@@ -16,6 +14,9 @@ import { useModal } from "@/lib/providers/modal-provider";
 import CheckoutModal from "./checkout-modal";
 import ProductModal from "../products/modal/product-modal";
 import useUserInfo from "@/lib/hooks/useUserInfo";
+import useCart from "@/lib/store/cart.store";
+import { formatNaira } from "@/lib/utils/helpers";
+import React from "react";
 
 const Cart = () => {
   const { items } = useCart();
@@ -57,14 +58,9 @@ const Cart = () => {
                   <p className="font-bold text-xl">{formatNaira(total)}</p>
                 </div>
 
-                <Button
-                  text="Checkout"
-                  variant="filled"
-                  icon={<IoBagCheckOutline />}
-                  fullWidth
-                  onClick={checkout}
-                  disabled={!total}
-                />
+                <Button variant="filled" icon={<IoBagCheckOutline />} fullWidth onClick={checkout} disabled={!total}>
+                  Checkout
+                </Button>
               </div>
             </div>
           </div>
@@ -72,7 +68,9 @@ const Cart = () => {
       ) : (
         <div className="space-y-4">
           <p>No products added to cart</p>
-          <Button onClick={() => router.push("/shop")} text="Continue Shopping" variant="filled" />
+          <Button onClick={() => router.push("/shop")} variant="filled">
+            Continue Shopping
+          </Button>
         </div>
       )}
     </div>

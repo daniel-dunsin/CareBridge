@@ -12,7 +12,7 @@ type Props = {
   report?: SkinMetrics;
 };
 
-const SkinModel = dynamic(() => import("@/components/Common/3D/skin"), {
+const SkinModel = dynamic(() => import("@/components/Common/Models/skin"), {
   ssr: false,
   loading: () => (
     <div className="grid place-content-center min-h-[10rem] text-center">

@@ -13,7 +13,7 @@ type Props = {
   report?: HeartMetrics;
 };
 
-const HeartModel = dynamic(() => import("@/components/Common/3D/heart"), {
+const HeartModel = dynamic(() => import("@/components/Common/Models/heart"), {
   ssr: false,
   loading: () => (
     <div className="grid place-content-center min-h-[10rem] text-center">

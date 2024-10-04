@@ -3,15 +3,15 @@
 import Button from "@/components/Common/Button";
 import Loader from "@/components/Common/Loaders";
 import Modal from "@/components/Common/Modal";
-import { formatNaira } from "@/lib/helpers/numbers";
 import { useModal } from "@/lib/providers/modal-provider";
 import { checkout, getMedicines } from "@/lib/services/medicine.service";
+import { formatNaira } from "@/lib/utils/helpers";
 import { toastError } from "@/lib/utils/toast";
 import { opacityVariant } from "@/lib/utils/variants";
 import { useQuery } from "@tanstack/react-query";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import React from "react";
 import { useCallback, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { CiLocationArrow1 } from "react-icons/ci";
@@ -122,13 +122,14 @@ And make sure to keep away from children and store in a cool dry place.`}
                           ))}
 
                           <Button
-                            text={`Proceed`}
                             icon={<CiLocationArrow1 />}
                             variant="filled"
                             fullWidth
                             className="mt-4"
                             onClick={() => setShowAdd(true)}
-                          />
+                          >
+                            Proceed
+                          </Button>
                         </motion.div>
                       ) : (
                         <div {...opacityVariant} className="space-y-4 dark:divide-white/10">
@@ -161,13 +162,9 @@ And make sure to keep away from children and store in a cool dry place.`}
                                 {...register("streetAddress", { required: true })}
                               />
                             </div>
-                            <Button
-                              text="Checkout"
-                              variant="filled"
-                              icon={<IoBagCheckOutline />}
-                              fullWidth
-                              loading={loading}
-                            />
+                            <Button variant="filled" icon={<IoBagCheckOutline />} fullWidth loading={loading}>
+                              Checkout
+                            </Button>
                           </form>
                         </div>
                       )}

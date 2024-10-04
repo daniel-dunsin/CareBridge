@@ -12,7 +12,7 @@ type Props = {
   report?: EyesMetrics;
 };
 
-const EyesModel = dynamic(() => import("@/components/Common/3D/eye"), {
+const EyesModel = dynamic(() => import("@/components/Common/Models/eye"), {
   ssr: false,
   loading: () => (
     <div className="grid place-content-center min-h-[10rem] text-center">

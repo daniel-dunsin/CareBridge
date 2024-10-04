@@ -3,7 +3,6 @@
 import { shopNavLink } from "@/lib/data/navbar";
 import Link from "next/link";
 import { useRef } from "react";
-import NavChild from "./nav-child";
 import { useSession } from "next-auth/react";
 import { RxHamburgerMenu } from "react-icons/rx";
 import gsap from "gsap";
@@ -13,8 +12,10 @@ import Image from "next/image";
 import { useTheme } from "@/lib/store/global.store";
 import { CgMoon, CgSun, CgUser } from "react-icons/cg";
 import { FaCartPlus, FaOpencart } from "react-icons/fa6";
-import useCart from "@/lib/store/cart.store";
 import { useRouter } from "next/navigation";
+import React from "react";
+import NavChild from "./nav-child";
+import useCart from "@/lib/store/cart.store";
 
 const ShopNavbar = () => {
   const ref = useRef<HTMLElement>(null);
@@ -163,7 +164,7 @@ const ShopNavbar = () => {
                 <>
                   <li key={id} className="w-full overflow-y-hidden">
                     <div className="w-full nav_link_child translate-y-full duration-300 group">
-                      <Link href={link.path} onClick={closeMenu}>
+                      <Link href={link.href} onClick={closeMenu}>
                         <div className="text-4xl text-gray-800 dark:text-gray-200 py-5 w-full font-bold hover:text-primary dark:hover:text-primary duration-300 flex items-center justify-center md:justify-start gap-6">
                           {link.label}
                         </div>

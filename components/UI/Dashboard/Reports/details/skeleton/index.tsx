@@ -12,7 +12,7 @@ type Props = {
   report?: BoneMetrics;
 };
 
-const BoneModel = dynamic(() => import("@/components/Common/3D/skeleton"), {
+const BoneModel = dynamic(() => import("@/components/Common/Models/skeleton"), {
   ssr: false,
   loading: () => (
     <div className="grid place-content-center min-h-[10rem] text-center">

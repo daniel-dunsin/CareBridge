@@ -14,7 +14,7 @@ type Props = {
   report?: TeethMetrics;
 };
 
-const TeethModel = dynamic(() => import("@/components/Common/3D/teeth"), {
+const TeethModel = dynamic(() => import("@/components/Common/Models/teeth"), {
   ssr: false,
   loading: () => (
     <div className="grid place-content-center min-h-[10rem] text-center">

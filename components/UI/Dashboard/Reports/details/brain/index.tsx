@@ -12,7 +12,7 @@ type Props = {
   report?: BrainMetrics;
 };
 
-const BrainModel = dynamic(() => import("@/components/Common/3D/brain"), {
+const BrainModel = dynamic(() => import("@/components/Common/Models/brain"), {
   ssr: false,
   loading: () => (
     <div className="grid place-content-center min-h-[10rem] text-center">

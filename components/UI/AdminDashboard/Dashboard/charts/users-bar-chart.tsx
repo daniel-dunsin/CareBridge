@@ -1,6 +1,6 @@
 "use client";
 import { usersDataBar } from "@/lib/data/admin-dashboard";
-import { formatDefault } from "@/lib/helpers/numbers";
+import { formatDefault } from "@/lib/utils/helpers";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 
 const UsersBarChart = () => {
