@@ -20,6 +20,7 @@ const video_module_1 = require("./video/video.module");
 const medicine_module_1 = require("./medicine/medicine.module");
 const order_module_1 = require("./order/order.module");
 const payment_module_1 = require("./payment/payment.module");
+const ai_module_1 = require("./ai/ai.module");
 let ApiModule = class ApiModule {
 };
 exports.ApiModule = ApiModule;
@@ -38,6 +39,7 @@ exports.ApiModule = ApiModule = __decorate([
             medicine_module_1.MedicineModule,
             order_module_1.OrderModule,
             payment_module_1.PaymentModule,
+            ai_module_1.AIModule,
         ],
     })
 ], ApiModule);

@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { DatabaseModule } from './database/database.module';
-import { SharedModule } from 'src/shared/shared.module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { TokenModule } from './token/token.module';
@@ -12,21 +11,23 @@ import { VideoModule } from './video/video.module';
 import { MedicineModule } from './medicine/medicine.module';
 import { OrderModule } from './order/order.module';
 import { PaymentModule } from './payment/payment.module';
+import { AIModule } from './ai/ai.module';
 
 @Module({
-   imports: [
-      DatabaseModule,
-      UserModule,
-      AuthModule,
-      TokenModule,
-      DoctorModule,
-      PatientModule,
-      DiagnosisModule,
-      AppointmentModule,
-      VideoModule,
-      MedicineModule,
-      OrderModule,
-      PaymentModule,
-   ],
+  imports: [
+    DatabaseModule,
+    UserModule,
+    AuthModule,
+    TokenModule,
+    DoctorModule,
+    PatientModule,
+    DiagnosisModule,
+    AppointmentModule,
+    VideoModule,
+    MedicineModule,
+    OrderModule,
+    PaymentModule,
+    AIModule,
+  ],
 })
 export class ApiModule {}
