@@ -104,7 +104,7 @@ export type IDoctor = {
   address?: Address;
   socials?: Socials;
   department: Department;
-  chargePerSession: number;
+  chargePerSession: number | string;
 } & IDef;
 
 export type ChangePassword = {
@@ -207,3 +207,12 @@ export type CreateMedicine = {
   stock: number;
   image: string;
 };
+
+export type IPayment = {
+  appointment: string;
+  amount: number;
+  paymentMethod: string;
+  paymentStatus: "pending" | "completed" | "cancelled";
+  transactionDate: string;
+  doctor: string;
+} & IDef;

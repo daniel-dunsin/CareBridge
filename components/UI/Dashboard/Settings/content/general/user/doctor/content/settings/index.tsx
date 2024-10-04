@@ -43,9 +43,12 @@ const SettingsDoctor = () => {
       ...rest
     } = data;
 
-    mutate(rest, {
-      onSuccess: () => queryClient.invalidateQueries({ predicate: (query) => query.queryKey.includes("doctor") }),
-    });
+    mutate(
+      { ...rest, chargePerSession: `${data.chargePerSession}` },
+      {
+        onSuccess: () => queryClient.invalidateQueries({ predicate: (query) => query.queryKey.includes("doctor") }),
+      }
+    );
   };
 
   return (
@@ -146,12 +149,22 @@ const SettingsDoctor = () => {
                   placeholder="e.g 5"
                 />
               </div>
-              <div className="space-y-1 md:col-span-2">
+              <div className="space-y-1">
                 <p>Gender</p>
 
                 <input
                   type="text"
                   {...register("user.gender", { required: true })}
+                  className="w-full bg-transparent p-2 border dark:border-white/10 rounded-lg capitalize bg-white dark:bg-white/10 disabled:bg-gray-200 disabled:cursor-not-allowed disabled:select-none"
+                  disabled
+                />
+              </div>
+              <div className="space-y-1">
+                <p>Charge Per Session (Naira)</p>
+
+                <input
+                  type="text"
+                  {...register("chargePerSession", { required: true })}
                   className="w-full bg-transparent p-2 border dark:border-white/10 rounded-lg capitalize bg-white dark:bg-white/10 disabled:bg-gray-200 disabled:cursor-not-allowed disabled:select-none"
                   disabled
                 />

@@ -65,7 +65,12 @@ const ProfileImageModal = () => {
 
   const upload = () =>
     mutate(b64, {
-      onSuccess: () => (queryClient.invalidateQueries({ predicate: (q) => q.queryKey.includes("user") }), hideModal()),
+      onSuccess: () => (
+        queryClient.invalidateQueries({
+          predicate: (q) => q.queryKey.includes("user") || q.queryKey.includes("doctor"),
+        }),
+        hideModal()
+      ),
     });
 
   return (

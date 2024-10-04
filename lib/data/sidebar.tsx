@@ -60,24 +60,24 @@ export const patientLinks: SidebarLink[] = [
         text: "Reports",
         path: "/reports",
       },
-      {
-        iconOutlined: <GiDoctorFace />,
-        iconFilled: <GiDoctorFace />,
-        text: "Doctors",
-        path: "/doctors",
-      },
+      // {
+      //   iconOutlined: <GiDoctorFace />,
+      //   iconFilled: <GiDoctorFace />,
+      //   text: "Doctors",
+      //   path: "/doctors",
+      // },
       {
         iconOutlined: <MdOutlineCurrencyExchange />,
         iconFilled: <MdOutlineCurrencyExchange />,
         text: "Billing Records",
         path: "/bills",
       },
-      {
-        iconOutlined: <MdOutlineReport />,
-        iconFilled: <MdReport />,
-        text: "Report an issue",
-        path: "/issue",
-      },
+      // {
+      //   iconOutlined: <MdOutlineReport />,
+      //   iconFilled: <MdReport />,
+      //   text: "Report an issue",
+      //   path: "/issue",
+      // },
     ],
   },
 ];

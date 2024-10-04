@@ -42,3 +42,10 @@ export const formatDollar = (price: number) => {
     style: "currency",
   }).format(price);
 };
+
+export const formatNaira = (price: number) => {
+  return new Intl.NumberFormat("en-NG", {
+    currency: "NGN",
+    style: "currency",
+  }).format(price);
+};
