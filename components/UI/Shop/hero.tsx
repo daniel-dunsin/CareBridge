@@ -5,13 +5,13 @@ import { CgSearch } from "react-icons/cg";
 
 const Hero = () => {
   return (
-    <header className="md:h-[35rem] min-h-screen flex items-center">
+    <header className="md:h-[20rem] min-h-screen flex items-center">
       <div className="grid md:grid-cols-2 gap-10 container items-center">
         <div className="space-y-4">
           <h1
             className={`font-extrabold text-5xl ${montserrat.className} dark:bg-clip-text dark:text-transparent text-black bg-gradient-to-t dark:to-gray-100 dark:from-black`}
           >
-            BDShop
+            CarePham
           </h1>
           <p>
             Your Trusted Partner in Health & Wellness <br /> Quality Medicines Delivered to Your Doorstep.

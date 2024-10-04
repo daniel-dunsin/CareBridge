@@ -32,7 +32,7 @@ const MedicinesDisplay = () => {
                 {medicines.map((medicine, id) => (
                   <Product key={id} {...medicine} />
                 ))}
-                {medicines.map((medicine, id) => (
+                {/* {medicines.map((medicine, id) => (
                   <Product key={id} {...medicine} />
                 ))}
                 {medicines.map((medicine, id) => (
@@ -40,7 +40,7 @@ const MedicinesDisplay = () => {
                 ))}
                 {medicines.map((medicine, id) => (
                   <Product key={id} {...medicine} />
-                ))}
+                ))} */}
               </>
             ) : (
               <div className="text-center p-10">

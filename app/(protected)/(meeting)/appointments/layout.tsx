@@ -1,8 +1,9 @@
 import StreamVideoProvider from "@/lib/providers/stream-provider";
-import React from "react";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
-  return <>{children}</>;
+  console.log("from layout...");
+
+  return <StreamVideoProvider>{children}</StreamVideoProvider>;
 };
 
 export default Layout;

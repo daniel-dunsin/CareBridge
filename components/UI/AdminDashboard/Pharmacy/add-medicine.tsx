@@ -39,7 +39,7 @@ const AddMedicine = () => {
 
   return (
     <div className="space-y-4">
-      <h1 className="font-semibold text-xl">Add Medicine</h1>
+      <h1 className="font-semibold text-xl">Publish Medicine</h1>
 
       {/* form */}
       <form
@@ -190,7 +190,7 @@ const AddMedicine = () => {
         </div>
         <div className="flex items-center justify-end gap-4">
           <Button variant="filled" disabled={adding} loading={adding}>
-            Add Medicine
+            Publish Medicine
           </Button>
           <Button variant="faint" role="button" disabled={adding}>
             Cancel

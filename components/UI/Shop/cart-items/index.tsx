@@ -126,7 +126,7 @@ const Item = ({ id, qty }: { id: string; qty: number }) => {
 
                 <div className="flex items-center select-none gap-3">
                   <button
-                    className="size-8 grid place-content-center border cursor-pointer duration-300 disabled:opacity-50 rounded dark:border-white/10 bg-primary text-white"
+                    className="size-8 grid place-content-center border cursor-pointer duration-300 disabled:opacity-50 rounded dark:border-white/10 bg-primary text-black"
                     // onClick={decrement}
                     disabled={qty === 0}
                   >
@@ -136,7 +136,7 @@ const Item = ({ id, qty }: { id: string; qty: number }) => {
                   <p>{qty}</p>
 
                   <button
-                    className="size-8 grid place-content-center border cursor-pointer duration-300 disabled:opacity-50 rounded dark:border-white/10 bg-primary text-white"
+                    className="size-8 grid place-content-center border cursor-pointer duration-300 disabled:opacity-50 rounded dark:border-white/10 bg-primary text-black"
                     // onClick={increment}
                     disabled={qty === data.stock}
                   >

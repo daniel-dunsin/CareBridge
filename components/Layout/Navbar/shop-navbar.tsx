@@ -16,6 +16,7 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import NavChild from "./nav-child";
 import useCart from "@/lib/store/cart.store";
+import Logo from "@/components/Common/Logos";
 
 const ShopNavbar = () => {
   const ref = useRef<HTMLElement>(null);
@@ -49,12 +50,10 @@ const ShopNavbar = () => {
         <div className={`flex items-center justify-between px-5 py-2 duration-300`}>
           <div className="flex items-center justify-end gap-5">
             <div>
-              <Link href={"/shop"} className="text-2xl font-bold">
+              <Link href={"/shop"} className="text-xl font-extrabold">
                 <div className="flex items-center gap-2">
-                  <FaCartPlus />
-                  <span>
-                    BD<span className="text-primary">Shop</span>
-                  </span>
+                  <Logo />
+                  <span>CarePham</span>
                 </div>
               </Link>
             </div>
@@ -84,12 +83,12 @@ const ShopNavbar = () => {
                 </div>
 
                 <div
-                  className="size-8 rounded-full cursor-pointer border m-over border-gray-500/40 dark:text-white text-black duration-300 hover:text-primary grid place-content-center relative"
+                  className="size-8 rounded-full cursor-pointer border m-over border-gray-500/40 duration-300 hover:text-primary grid place-content-center relative"
                   onClick={() => push("/cart")}
                 >
                   <FaOpencart />
 
-                  <div className="size-5 rounded-full bg-primary text-white absolute -top-2 -right-2 shadow grid place-content-center font-semibold text-sm">
+                  <div className="size-5 rounded-full bg-primary text-black absolute -top-2 -right-2 shadow grid place-content-center font-semibold text-sm">
                     <p>{items.length}</p>
                   </div>
                 </div>
@@ -133,7 +132,7 @@ const ShopNavbar = () => {
                 >
                   <FaOpencart />
 
-                  <div className="size-5 rounded-full bg-primary text-white absolute -top-2 -right-2 shadow grid place-content-center font-semibold text-sm">
+                  <div className="size-5 rounded-full bg-primary text-black absolute -top-2 -right-2 shadow grid place-content-center font-semibold text-sm">
                     <p>{items.length}</p>
                   </div>
                 </div>

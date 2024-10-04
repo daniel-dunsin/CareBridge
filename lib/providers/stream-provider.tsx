@@ -18,6 +18,8 @@ const StreamVideoProvider = ({ children }: { children: ReactNode }) => {
 
     if (!apiKey) throw new Error("Stream API key missing");
 
+    // console.log({ apiKey });
+
     const client = new StreamVideoClient({
       apiKey,
       user: {
@@ -27,6 +29,8 @@ const StreamVideoProvider = ({ children }: { children: ReactNode }) => {
       },
       tokenProvider: tokenProvider,
     });
+
+    // console.log({ client });
 
     setVideoClient(client);
   }, [status, session]);

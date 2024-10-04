@@ -19,8 +19,10 @@ const ProductModal = (medicine: Medicine) => {
 
   const { addItem, items } = useCart();
 
+  console.log({ items });
+
   const [qty, setQuantity] = useState(0);
-  const [inCart, setInCart] = useState(items.find((i) => i.item._id === medicine._id));
+  const [inCart, setInCart] = useState(items.length > 0 && items.find((i) => i.item._id === medicine._id));
 
   const increment = () => setQuantity((prev) => (prev < stock ? prev + 1 : prev));
   const decrement = () => setQuantity((prev) => (prev > 0 ? prev - 1 : prev));
@@ -87,7 +89,7 @@ const ProductModal = (medicine: Medicine) => {
           <div className="space-y-1 py-3">
             <div className="flex items-center select-none justify-between">
               <button
-                className="size-10 grid place-content-center border cursor-pointer duration-300 disabled:opacity-50 rounded-xl dark:border-white/10 bg-primary text-white"
+                className="size-10 grid place-content-center border cursor-pointer duration-300 disabled:opacity-50 rounded-xl dark:border-white/10 bg-primary text-black"
                 onClick={decrement}
                 disabled={qty === 0}
               >
@@ -97,7 +99,7 @@ const ProductModal = (medicine: Medicine) => {
               <p>{qty}</p>
 
               <button
-                className="size-10 grid place-content-center border cursor-pointer duration-300 disabled:opacity-50 rounded-xl dark:border-white/10 bg-primary text-white"
+                className="size-10 grid place-content-center border cursor-pointer duration-300 disabled:opacity-50 rounded-xl dark:border-white/10 bg-primary text-black"
                 onClick={increment}
                 disabled={qty === stock}
               >
@@ -108,7 +110,7 @@ const ProductModal = (medicine: Medicine) => {
             <Button
               variant="filled"
               fullWidth
-              className="text-white"
+              className="text-black"
               onClick={add}
               disabled={inCart || qty === 0 ? true : false}
             >{`${inCart ? "Added to cart" : "Add to cart"}`}</Button>
