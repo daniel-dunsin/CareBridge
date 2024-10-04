@@ -44,8 +44,7 @@ const authOptions: AuthOptions = {
 
           // return { id: crypto.randomUUID() }
         } catch (err) {
-          console.log({ err });
-          return null;
+          throw new Error("Unauthorized");
         }
       },
     }),
