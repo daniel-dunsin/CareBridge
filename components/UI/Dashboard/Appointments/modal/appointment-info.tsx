@@ -7,11 +7,13 @@ import { useModal } from "@/lib/providers/modal-provider";
 import { cancelAppointment, getSingleAppointment, updateAppointmentStatus } from "@/lib/services/appointment.service";
 import { getAppointmentReport } from "@/lib/services/report.service";
 import { EventType } from "@/lib/store/event.store";
+import { toastError, toastSuccess } from "@/lib/utils/toast";
+import { Call, useStreamVideoClient } from "@stream-io/video-react-sdk";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { format, isBefore } from "date-fns";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
 import { FC, useCallback, useMemo } from "react";
 import { GiFemale, GiMale } from "react-icons/gi";
 
@@ -61,13 +63,82 @@ const AppointmentInfoModal: FC<Props> = ({ event, refetchAppointments }) => {
     }
   }, [appointment, user]);
 
+  // MEETING----------------------
+
+  const [meetingState, setMeetingState] = useState<
+    "isScheduleMeeting" | "isJoiningMeeting" | "isInstantMeeting" | undefined
+  >();
+
+  const [starting, setStarting] = useState(false);
+
+  const [values, setValues] = useState({
+    dateTime: new Date(),
+    description: "",
+    link: "",
+  });
+
+  const client = useStreamVideoClient();
+
+  const [callDetails, setCallDetails] = useState<Call>();
+
+  const createMeeting = async () => {
+    console.log({ client, user });
+    if (!client || !user) return;
+
+    console.log("client and user exist");
+
+    try {
+      setStarting(true);
+
+      if (!values.dateTime) {
+        toastError("Please select a date and time");
+        return;
+      }
+
+      const id = crypto.randomUUID();
+
+      const call = client.call("default", id);
+
+      if (!call) {
+        throw new Error("Failed to create call");
+      }
+
+      const startsAt = values.dateTime.toISOString() || new Date(Date.now()).toISOString();
+      const description = values.description || "Instant Meeting";
+
+      await call.getOrCreate({
+        data: {
+          starts_at: startsAt,
+          custom: {
+            description,
+          },
+        },
+      });
+
+      setCallDetails(call);
+
+      if (!values.description) {
+        router.push(`/meeting/${call.id}`);
+      }
+
+      toastSuccess("Meeting created successfully");
+    } catch (error) {
+      console.log(error);
+      toastError("Failed to create meeting");
+    } finally {
+      setStarting(false);
+    }
+  };
+
+  const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${callDetails?.id}`;
+
   const Footer = useCallback(() => {
     if (user && appointment) {
       const isPast = isBefore(appointment?.startTime!, new Date().toISOString());
       switch (isPast) {
         case true:
           return (
-            <div className="flex items-center justify-end">
+            <div className="flex items-center justify-between gap-2">
               {((user?.role === "patient" && appointment?.patientStatus === "pending") ||
                 (user?.role === "doctor" && appointment?.doctorStatus === "pending")) && (
                 <Select
@@ -84,15 +155,20 @@ const AppointmentInfoModal: FC<Props> = ({ event, refetchAppointments }) => {
                 />
               )}
               {user?.role === "doctor" ? (
-                <Button
-                  className="ml-auto"
-                  onClick={() => {
-                    router.push(`/appointments/${appointment!._id}/report/submit`);
-                    hideModal();
-                  }}
-                >
-                  Submit Report
-                </Button>
+                <div className="flex items-center gap-2">
+                  <Button className="ml-auto" onClick={() => (setMeetingState("isInstantMeeting"), createMeeting())}>
+                    {starting ? "Starting..." : "Start Meeting"}
+                  </Button>
+                  <Button
+                    className="ml-auto"
+                    onClick={() => {
+                      router.push(`/appointments/${appointment!._id}/report/submit`);
+                      hideModal();
+                    }}
+                  >
+                    Submit Report
+                  </Button>
+                </div>
               ) : (
                 report && (
                   <Button

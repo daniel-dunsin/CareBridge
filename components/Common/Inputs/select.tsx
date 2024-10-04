@@ -2,6 +2,8 @@ import { FC, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { fadeToBottomVariant, fadeToTopVariant } from "@/lib/utils/variants";
 import { FaChevronUp } from "react-icons/fa6";
+import React from "react";
+import useDropDown from "@/lib/hooks/useDropDown";
 
 export type Option = { value: string; label: string };
 
@@ -17,37 +19,39 @@ type Props = {
 };
 
 const Select: FC<Props> = ({ options, label, placeholder, onValueChange, loading = false, data = null, dropUp }) => {
-  const [isOpened, setIsOpened] = useState(false);
+  // const [isOpened, setIsOpened] = useState(false);
 
-  const toggleDrop = () => setIsOpened((prev) => !prev);
+  // const toggleDrop = () => setIsOpened((prev) => !prev);
 
   const [pickedData, setPickedData] = useState<Option | null>(data);
+
+  const { dropdownRef, toggleDropdown, isOpen, closeDropdown } = useDropDown();
 
   const updateData = (option: Option) => {
     setPickedData(option);
     onValueChange(option.value);
-    setIsOpened(false);
+    closeDropdown();
   };
 
   return (
-    <div className="space-y-1 relative">
+    <div className="space-y-1 relative" ref={dropdownRef}>
       <p className="font-bold">{label}</p>
       <div
-        className={`bg-white dark:bg-white/10 duration-200 hover:bg-gray-100 dark:hover:bg-transparent w-full p-2 border dark:border-white/10 rounded-lg select-none flex items-center justify-between ${
+        className={`bg-white dark:bg-white/10 duration-200 hover:bg-gray-100 dark:hover:bg-transparent w-full p-2 border dark:border-white/10 rounded-lg select-none flex items-center justify-between gap-2 ${
           loading ? "cursor-not-allowed" : "cursor-pointer"
         }`}
-        onClick={loading ? () => {} : toggleDrop}
+        onClick={loading ? () => {} : toggleDropdown}
       >
         {!pickedData ? (
           <p className="opacity-50">{loading ? "Loading..." : placeholder ?? "Select an option"}</p>
         ) : (
           <p>{pickedData.label}</p>
         )}
-        <FaChevronUp size={18} className={`duration-200 ${!isOpened && "rotate-180"}`} />
+        <FaChevronUp size={18} className={`duration-200 ${!isOpen && "rotate-180"}`} />
       </div>
 
       <AnimatePresence mode="wait">
-        {isOpened && <OptionComp options={options} updateData={updateData} dropUp={dropUp} />}
+        {isOpen && <OptionComp options={options} updateData={updateData} dropUp={dropUp} />}
       </AnimatePresence>
     </div>
   );
