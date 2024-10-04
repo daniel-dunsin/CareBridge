@@ -4,7 +4,7 @@ import TableComponent from "@/components/Common/Table";
 import React, { useEffect, useState } from "react";
 import columns from "../Table/columns";
 import { useQuery } from "@tanstack/react-query";
-import { getDoctors } from "@/lib/services/doctor.service";
+import { getDoctors } from "@/lib/services/doctors.service";
 import { departments } from "@/lib/data/dashboard";
 import { Department } from "@/lib/types";
 import { FiFilter } from "react-icons/fi";

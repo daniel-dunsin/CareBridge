@@ -48,10 +48,8 @@ const columns: ColumnDef<HeartMetrics>[] = [
     header: () => "Action",
     cell: ({ row }) => {
       return (
-        <Link
-          href={`/reports/${row.original._id}?department=${DepartmentsEnum.DERMATOLOGY}`}
-        >
-          <Button text="View Report" size="extra-small" />
+        <Link href={`/reports/${row.original._id}?department=${DepartmentsEnum.DERMATOLOGY}`}>
+          <Button size="extra-small">View Report</Button>
         </Link>
       );
     },
