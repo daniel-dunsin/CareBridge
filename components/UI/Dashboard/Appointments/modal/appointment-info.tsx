@@ -51,8 +51,6 @@ const AppointmentInfoModal: FC<Props> = ({ event, refetchAppointments }) => {
 
   const { user } = useUserInfo();
 
-  console.log({ user });
-
   const partner = useMemo(() => {
     if (appointment && user) {
       if (user!.role === "doctor") {

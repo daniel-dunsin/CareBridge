@@ -63,7 +63,8 @@ const BigCalendar = () => {
       endTime: end,
       mode: "online",
     });
-    showModal(<AppointmentModal />);
+
+    if (user?.role === "patient") showModal(<AppointmentModal />);
   };
 
   const handleSelectEvent = (event: EventType) => {

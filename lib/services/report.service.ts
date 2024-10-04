@@ -11,8 +11,12 @@ export const getAppointmentReport = (appointmentId: string) => async () => {
       `/consultation/report/appointment/${appointmentId}`
     );
 
+    if (!data.data) return null;
+
     return data.data;
-  } catch (error) {}
+  } catch (error) {
+    return null;
+  }
 };
 
 export const submitCardiologyReport = async ({

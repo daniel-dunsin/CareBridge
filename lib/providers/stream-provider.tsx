@@ -1,5 +1,5 @@
 "use client";
-import { StreamCall, StreamVideo, StreamVideoClient, User } from "@stream-io/video-react-sdk";
+import { StreamVideo, StreamVideoClient, User } from "@stream-io/video-react-sdk";
 import { ReactNode, useEffect, useState } from "react";
 import { tokenProvider } from "../actions/stream.action";
 import Loader from "@/components/Common/Loaders";
