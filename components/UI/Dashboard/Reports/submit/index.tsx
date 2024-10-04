@@ -53,11 +53,9 @@ const SubmitReport = () => {
 
         <h1>You have already submitted a report for this appointment</h1>
 
-        <Button
-          text="View Report"
-          variant="filled"
-          onClick={() => push(`/reports/${report!._id}?department=${appointment?.department}`)}
-        />
+        <Button variant="filled" onClick={() => push(`/reports/${report!._id}?department=${appointment?.department}`)}>
+          View Report
+        </Button>
       </div>
     );
   }

@@ -127,7 +127,7 @@ const AppointmentInfoModal: FC<Props> = ({ event, refetchAppointments }) => {
       className="bg-white dark:bg-dark shadow-2xl p-4 rounded-xl xl:min-w-[40rem] min-h-[28rem] max-h-[28rem] overflow-y-auto lg:min-w-[30rem] space-y-4 relative"
     >
       {appointmentLoading || reportLoading ? (
-        <div className="grid place-content-center w-full h-full">
+        <div className="grid place-content-center w-full xl:min-w-[40rem] min-h-[28rem] max-h-[28rem]">
           <Loader />
         </div>
       ) : (

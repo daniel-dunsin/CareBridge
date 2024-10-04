@@ -287,7 +287,9 @@ const Cardiology: FC<Props> = ({ refetchReport }) => {
         </div>
       </section>
 
-      <Button type="submit" text="Submit Report" variant="filled" className="ml-auto" loading={isPending} />
+      <Button type="submit" variant="filled" className="ml-auto" loading={isPending}>
+        Submit Report
+      </Button>
     </form>
   );
 };
