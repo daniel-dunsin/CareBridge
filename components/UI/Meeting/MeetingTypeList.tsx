@@ -25,7 +25,7 @@ type Props = {
   loading?: boolean;
 };
 
-const MeetingTypeList = ({ full = true, extraFn, id, loading = false }: Props) => {
+const MeetingTypeList = ({ full = true, extraFn, id: propId, loading = false }: Props) => {
   const router = useRouter();
   // const [meetingState, setMeetingState] = useState<
   //   "isScheduleMeeting" | "isJoiningMeeting" | "isInstantMeeting" | undefined
@@ -89,7 +89,7 @@ const MeetingTypeList = ({ full = true, extraFn, id, loading = false }: Props) =
 
       if (extraFn) {
         extraFn(
-          { joinUrl: meetingLink, appointmentId: id ?? "" },
+          { joinUrl: meetingLink, appointmentId: propId ?? "" },
           {
             onSuccess: () => {
               toastSuccess("Meeting created successfully");
