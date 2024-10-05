@@ -431,6 +431,9 @@ export class AppointmentProvider {
     return {
       success: true,
       message: 'meeting link generated successfully',
+      data: {
+        join_url,
+      },
     };
   }
 }
