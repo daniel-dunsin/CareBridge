@@ -90,7 +90,7 @@ const AppointmentInfoModal: FC<Props> = ({ event, refetchAppointments }) => {
               )}
               {user?.role === "doctor" ? (
                 <div className="flex items-center gap-2">
-                  <MeetingTypeList />
+                  <MeetingTypeList full={false} />
                   <Button
                     className="ml-auto"
                     onClick={() => {
