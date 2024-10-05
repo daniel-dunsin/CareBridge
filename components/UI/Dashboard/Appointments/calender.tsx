@@ -35,17 +35,19 @@ const BigCalendar = () => {
 
   const { user } = useUserInfo();
 
-  const { data: appointments, refetch } = useQuery({
+  const {
+    data: appointments,
+    isPending,
+    refetch,
+  } = useQuery({
     queryKey: ["appointments"],
     queryFn: getAppointments,
   });
 
   useEffect(() => {
-    if (appointments?.length! > 0) {
-      const events = mapAppointmentsToEvents(appointments || [], user!);
-      setEvents(events);
-    }
-  }, [appointments]);
+    const events = mapAppointmentsToEvents(appointments || [], user!);
+    setEvents(events);
+  }, [appointments, isPending]);
 
   const handleSelect = ({ start, end }: { start: any; end: any }) => {
     // check if date selected is in the past

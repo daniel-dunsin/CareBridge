@@ -188,7 +188,7 @@ const AppointmentModal = () => {
                     type="date"
                     {...register("appointmentDate", { required: true })}
                     className="w-full border dark:border-white/10 rounded-xl p-2 dark:bg-dark cursor-not-allowed"
-                    disabled
+                    // disabled
                   />
                 </div>
                 <div className="space-y-1">
@@ -200,7 +200,7 @@ const AppointmentModal = () => {
                   />
                 </div>
                 <div className="space-y-1">
-                  <label>End Time</label>
+                  <label>End Time (1hr after start)</label>
                   <input
                     type="time"
                     {...register("endTime", { required: true })}

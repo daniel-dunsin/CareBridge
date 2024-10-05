@@ -39,7 +39,7 @@ type ThemeStore = ThemeStoreState & ThemeStoreActions;
 export const useTheme = create<ThemeStore>()(
   persist(
     (set) => ({
-      isDark: true,
+      isDark: false,
       updateDarkMode: (newState) => set((state) => ({ ...state, isDark: newState })),
     }),
     { name: "cb-theme" }

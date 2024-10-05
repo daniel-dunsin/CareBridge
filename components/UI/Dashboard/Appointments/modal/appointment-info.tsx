@@ -2,6 +2,7 @@ import Button from "@/components/Common/Button";
 import Select from "@/components/Common/Inputs/select";
 import Loader from "@/components/Common/Loaders";
 import Modal from "@/components/Common/Modal";
+import MeetingTypeList from "@/components/UI/Meeting/MeetingTypeList";
 import useUserInfo from "@/lib/hooks/useUserInfo";
 import { useModal } from "@/lib/providers/modal-provider";
 import { cancelAppointment, getSingleAppointment, updateAppointmentStatus } from "@/lib/services/appointment.service";
@@ -63,74 +64,7 @@ const AppointmentInfoModal: FC<Props> = ({ event, refetchAppointments }) => {
     }
   }, [appointment, user]);
 
-  // MEETING----------------------
-
-  const [meetingState, setMeetingState] = useState<
-    "isScheduleMeeting" | "isJoiningMeeting" | "isInstantMeeting" | undefined
-  >();
-
-  const [starting, setStarting] = useState(false);
-
-  const [values, setValues] = useState({
-    dateTime: new Date(),
-    description: "",
-    link: "",
-  });
-
-  const client = useStreamVideoClient();
-
-  const [callDetails, setCallDetails] = useState<Call>();
-
-  const createMeeting = async () => {
-    console.log({ client, user });
-    if (!client || !user) return;
-
-    console.log("client and user exist");
-
-    try {
-      setStarting(true);
-
-      if (!values.dateTime) {
-        toastError("Please select a date and time");
-        return;
-      }
-
-      const id = crypto.randomUUID();
-
-      const call = client.call("default", id);
-
-      if (!call) {
-        throw new Error("Failed to create call");
-      }
-
-      const startsAt = values.dateTime.toISOString() || new Date(Date.now()).toISOString();
-      const description = values.description || "Instant Meeting";
-
-      await call.getOrCreate({
-        data: {
-          starts_at: startsAt,
-          custom: {
-            description,
-          },
-        },
-      });
-
-      setCallDetails(call);
-
-      if (!values.description) {
-        router.push(`/meeting/${call.id}`);
-      }
-
-      toastSuccess("Meeting created successfully");
-    } catch (error) {
-      console.log(error);
-      toastError("Failed to create meeting");
-    } finally {
-      setStarting(false);
-    }
-  };
-
-  const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${callDetails?.id}`;
+  // const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${callDetails?.id}`;
 
   const Footer = useCallback(() => {
     if (user && appointment) {
@@ -156,9 +90,7 @@ const AppointmentInfoModal: FC<Props> = ({ event, refetchAppointments }) => {
               )}
               {user?.role === "doctor" ? (
                 <div className="flex items-center gap-2">
-                  <Button className="ml-auto" onClick={() => (setMeetingState("isInstantMeeting"), createMeeting())}>
-                    {starting ? "Starting..." : "Start Meeting"}
-                  </Button>
+                  <MeetingTypeList />
                   <Button
                     className="ml-auto"
                     onClick={() => {
