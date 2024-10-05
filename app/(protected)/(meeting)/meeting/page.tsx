@@ -35,8 +35,8 @@ const Page = () => {
         <div className="absolute top-0 left-0 w-full h-full">
           <Image src="/images/meeting/meet.jpg" layout="fill" objectFit="cover" alt="doctor" />
         </div>
-        <div className="absolute flex items-end p-10 top-0 left-0 w-full h-full from-black/50 bg-gradient-to-t text-white">
-          <div className="flex items-center justify-between w-full">
+        <div className="absolute flex items-end md:p-10 p-4 top-0 left-0 w-full h-full from-black/50 bg-gradient-to-t text-white">
+          <div className="md:flex space-y-1 items-center justify-between w-full">
             <p className="font-extrabold text-5xl">Pending Meetings</p>
 
             <Button disabled={isFetching} onClick={refetch}>
