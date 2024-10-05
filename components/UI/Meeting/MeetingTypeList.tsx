@@ -42,6 +42,8 @@ const MeetingTypeList = ({ full = true, extraFn, id, loading = false }: Props) =
     link: "",
   });
 
+  let meetingLink = "";
+
   const [callDetails, setCallDetails] = useState<Call>();
 
   const createMeeting = async () => {
@@ -78,6 +80,7 @@ const MeetingTypeList = ({ full = true, extraFn, id, loading = false }: Props) =
       setCallDetails(call);
 
       if (!values.description) {
+        meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${call.id}`;
         router.push(`/meeting/${call.id}`);
       }
 
@@ -90,7 +93,7 @@ const MeetingTypeList = ({ full = true, extraFn, id, loading = false }: Props) =
     }
   };
 
-  const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${callDetails?.id}`;
+  // const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${callDetails?.id}`;
 
   return (
     <Button
