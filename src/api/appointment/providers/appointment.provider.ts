@@ -4,19 +4,17 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { BookSessionDto, SessionDto } from '../dto/book-appointment.dto';
-import { User, UserDocument } from '../../user/schema/user.schema';
+import { UserDocument } from '../../user/schema/user.schema';
 import { AppointmentService } from '../services/appointment.service';
 import { DoctorService } from '../../doctor/doctor.service';
 import { PatientService } from '../../patient/patient.service';
 import { FilterQuery, Types } from 'mongoose';
-import { AppointmentMode, AppointmentStatus } from '../enums';
+import { AppointmentStatus } from '../enums';
 import { MailService } from 'src/shared/mail/mail.service';
 import { add, endOfDay, format, startOfDay } from 'date-fns';
 import { AppointmentDocument } from '../schemas/appointment.schema';
 import { RoleNames } from '../../user/enums';
-import { ZoomService } from 'src/shared/zoom/zoom.service';
-import { Cron, CronExpression } from '@nestjs/schedule';
-import { Type } from 'class-transformer';
+import { Cron } from '@nestjs/schedule';
 import { v4 } from 'uuid';
 import { ConfigService } from '@nestjs/config';
 import { PaymentService } from 'src/api/payment/services/payment.service';
@@ -111,17 +109,8 @@ export class AppointmentProvider {
     const amount = doctor.chargePerSession;
     const reference = `doctor-payment-${v4()}`;
 
-    let join_url = undefined;
-
-    if (bookSessionDto.mode == AppointmentMode.ONLINE) {
-      const frontendUrl = this.configService.get<string>('FRONTEND_URL');
-      const randomId = v4();
-      join_url = `${frontendUrl}/meet?room_id=${randomId}`;
-    }
-
     const appointment = {
       ...bookSessionDto,
-      join_url,
       department: doctor.department,
       doctor: doctor._id,
       patient: patient._id,
@@ -425,5 +414,23 @@ export class AppointmentProvider {
         }),
       );
     }
+  }
+
+  async createMeetingLink(appointmentId: string, join_url: string) {
+    const appointment = await this.appointmentService.getAppointment({
+      _id: new Types.ObjectId(appointmentId),
+    });
+
+    if (!appointment) throw new NotFoundException('Appointment not found');
+
+    if (!appointment.join_url) {
+      appointment.join_url = join_url;
+      await appointment.save();
+    }
+
+    return {
+      success: true,
+      message: 'meeting link generated successfully',
+    };
   }
 }
