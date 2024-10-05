@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { Auth, Roles } from 'src/shared/decorators/auth.decorators';
+import { ApiBearerAuth, ApiBody, ApiTags } from '@nestjs/swagger';
+import { Auth, IsPublic, Roles } from 'src/shared/decorators/auth.decorators';
 import { UserDocument } from '../../user/schema/user.schema';
 import { BookSessionDto, SessionDto } from '../dto/book-appointment.dto';
 import { AppointmentProvider } from '../providers/appointment.provider';
@@ -138,6 +138,17 @@ export class AppointmentController {
 
   @Put('/:appointmentId/meeting-link')
   @Roles([RoleNames.DOCTOR, RoleNames.PATIENT])
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        join_url: {
+          type: 'string',
+        },
+      },
+    },
+  })
+  @IsPublic()
   async generateMeetingLink(
     @Param('appointmentId') appointmentId: string,
     @Body('join_url') join_url: string,

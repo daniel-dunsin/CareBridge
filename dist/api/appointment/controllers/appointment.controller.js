@@ -170,6 +170,17 @@ __decorate([
 __decorate([
     (0, common_1.Put)('/:appointmentId/meeting-link'),
     (0, auth_decorators_1.Roles)([enums_1.RoleNames.DOCTOR, enums_1.RoleNames.PATIENT]),
+    (0, swagger_1.ApiBody)({
+        schema: {
+            type: 'object',
+            properties: {
+                join_url: {
+                    type: 'string',
+                },
+            },
+        },
+    }),
+    (0, auth_decorators_1.IsPublic)(),
     __param(0, (0, common_1.Param)('appointmentId')),
     __param(1, (0, common_1.Body)('join_url')),
     __metadata("design:type", Function),

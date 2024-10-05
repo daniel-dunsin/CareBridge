@@ -77,5 +77,8 @@ export declare class AppointmentController {
     generateMeetingLink(appointmentId: string, join_url: string): Promise<{
         success: boolean;
         message: string;
+        data: {
+            join_url: string;
+        };
     }>;
 }
