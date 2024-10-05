@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Call, useStreamVideoClient } from "@stream-io/video-react-sdk";
 import { toastError, toastSuccess } from "@/lib/utils/toast";
@@ -8,6 +8,7 @@ import useUserInfo from "@/lib/hooks/useUserInfo";
 import MeetingModal from "./MeetingModal";
 import Button from "@/components/Common/Button";
 import { UseMutateFunction } from "@tanstack/react-query";
+import Modal from "@/components/Common/Modal";
 
 type Props = {
   full?: boolean;
@@ -42,7 +43,7 @@ const MeetingTypeList = ({ full = true, extraFn, id, loading = false }: Props) =
     link: "",
   });
 
-  let meetingLink = "";
+  // let meetingLink = "";
 
   const [callDetails, setCallDetails] = useState<Call>();
 
@@ -79,14 +80,27 @@ const MeetingTypeList = ({ full = true, extraFn, id, loading = false }: Props) =
 
       setCallDetails(call);
 
-      if (!values.description) {
-        meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${call.id}`;
-        router.push(`/meeting/${call.id}`);
+      // if (!values.description) {
+      //   // meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${call.id}`;
+      //   router.push(`/meeting/${call.id}`);
+      // }
+
+      const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${call.id}`;
+
+      if (extraFn) {
+        extraFn(
+          { joinUrl: meetingLink, appointmentId: id ?? "" },
+          {
+            onSuccess: () => {
+              toastSuccess("Meeting created successfully");
+              router.push(`/meeting/${call.id}`);
+            },
+            onError: () => {
+              toastError("Failed to start meeting");
+            },
+          }
+        );
       }
-
-      console.log({ meetingLink });
-
-      toastSuccess("Meeting created successfully");
     } catch (error) {
       console.log(error);
       toastError("Failed to create meeting");
@@ -95,17 +109,25 @@ const MeetingTypeList = ({ full = true, extraFn, id, loading = false }: Props) =
     }
   };
 
-  // const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${callDetails?.id}`;
+  // let meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${callDetails?.id}`;
+
+  // useEffect(() => {
+  //   // console.log({ meetingLinkInside: meetingLink });
+  //   if (callDetails) {
+  //     meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${callDetails.id}`;
+  //   }
+  // }, [callDetails]);
 
   return (
-    <Button
-      className={full ? `mt-20 container` : ""}
-      onClick={() => (extraFn ? extraFn({ joinUrl: meetingLink, appointmentId: id ?? "" }) : () => {}, createMeeting())}
-      disabled={starting || loading}
-    >
+    <Button className={full ? `mt-20 container` : ""} onClick={createMeeting} disabled={starting || loading}>
       {starting ? "Starting..." : "Start Meeting"}
     </Button>
   );
 };
+
+// const ConfirmMeetingModal = ({ id }: { id: string }) => {
+
+//   return  <Modal></Modal>
+// };
 
 export default MeetingTypeList;

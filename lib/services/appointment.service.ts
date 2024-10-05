@@ -87,6 +87,11 @@ export const updateAppointmentJoinURL = async ({
       join_url: joinUrl,
     });
 
+    console.log({
+      appointmentId,
+      joinUrl,
+    });
+
     toastSuccess("Appointment link updated, please join and wait for patient to join.");
 
     return data;

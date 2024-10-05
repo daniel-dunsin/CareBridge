@@ -15,6 +15,7 @@ const Page = () => {
     data,
     isPending: loading,
     isFetching,
+    refetch,
   } = useQuery({ queryFn: getPendingAppointments, queryKey: ["appointments"] });
 
   const { mutate, isPending: starting } = useMutation({
@@ -38,7 +39,9 @@ const Page = () => {
           <div className="flex items-center justify-between w-full">
             <p className="font-extrabold text-5xl">Pending Meetings</p>
 
-            <Button disabled={isFetching}>{isFetching ? "Refreshing..." : "Refresh"}</Button>
+            <Button disabled={isFetching} onClick={refetch}>
+              {isFetching ? "Refreshing..." : "Refresh"}
+            </Button>
           </div>
         </div>
       </div>
@@ -53,7 +56,7 @@ const Page = () => {
         ) : (
           <>
             {data && data.length > 0 ? (
-              <div className="grid grid-cols-4 gap-4">
+              <div className="grid md:grid-cols-4 sm:grid-cols-2 gap-4">
                 {data
                   .sort((d1, d2) =>
                     new Date(d1.appointmentDate).getTime() > new Date(d2.appointmentDate).getTime() ? 1 : -1
