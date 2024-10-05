@@ -9,6 +9,7 @@ import Image from "next/image";
 import useUserInfo from "@/lib/hooks/useUserInfo";
 import Link from "next/link";
 import Button from "@/components/Common/Button";
+import ScreenRecorder from "@/components/UI/Dashboard/Meeting/Recorder";
 
 const Page = () => {
   const {
@@ -127,6 +128,8 @@ const Page = () => {
           </>
         )}
       </div>
+
+      {/* <ScreenRecorder /> */}
     </div>
   );
 };
