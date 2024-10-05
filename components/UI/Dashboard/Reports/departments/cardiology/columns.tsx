@@ -12,12 +12,13 @@ const columns: ColumnDef<HeartMetrics>[] = [
     accessorKey: "doctor",
     header: () => "Doctor",
     cell: ({ row }) => {
-      const doctor = row.original.consultation?.appointment.doctor!;
+      const doctor = row.original.consultation?.appointment?.doctor;
+
       return (
         <div className="flex items-center gap-2 min-w-[15rem]">
           <div className="size-10 rounded-full border relative overflow-hidden">
             <Image
-              src={doctor.user.profilePicture!}
+              src={doctor ? doctor.user.profilePicture : ""}
               alt="profile-pic"
               width={100}
               height={100}
@@ -27,9 +28,9 @@ const columns: ColumnDef<HeartMetrics>[] = [
 
           <div className="text-sm">
             <p className="font-bold">
-              {doctor.user.firstName} {doctor.user.lastName}
+              {doctor?.user.firstName} {doctor?.user.lastName}
             </p>
-            <p className="text-xs text-gray-400">{doctor.department}</p>
+            <p className="text-xs text-gray-400">{doctor?.department}</p>
           </div>
         </div>
       );
