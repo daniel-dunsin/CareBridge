@@ -29,6 +29,9 @@ let AIService = class AIService {
     SUMMARIZER_QUERY(transcript) {
         return `Summarize the following doctor-patient appointment video call transcript. The summary should include the key points discussed, like, the patient's symptoms, the doctor's diagnosis or advice, any medications prescribed, follow-up recommendations, and other important details. Format the summary clearly under headings such as 'Symptoms,' 'Diagnosis,' 'Medications/Prescriptions,' and 'Follow-up Actions.' Ensure the summary is concise but covers all critical information. Here is the transcript:\n\n${transcript}`;
     }
+    SYMPTOM_CHECKER_QUERY(symptom) {
+        return `You are a virtual medical assistant. Based on a single user input, summarize and analyze the symptoms described and provide potential causes, common conditions, possible tests, and self-care advice. Always remind the user to consult a healthcare professional for an accurate diagnosis. Ensure that your response is clear, organized, and based on general medical knowledge.\n User Prompt: I am experiencing the following symptoms ${symptom}`;
+    }
     async transcribeCall(file) {
         const { url } = await this.fileService.uploadResource(file.path, {
             resource_type: 'video',
@@ -88,11 +91,22 @@ let AIService = class AIService {
         const speakerFormattedTranscript = await this.formatTranscript(transcript);
         const { response } = await this.geminiai.generateContent(this.SUMMARIZER_QUERY(speakerFormattedTranscript));
         const data = {
-            summary: response.text(),
+            text: response.text(),
         };
         return {
             success: true,
             message: 'Summary generated',
+            data,
+        };
+    }
+    async checkSymptom(symptom) {
+        const { response } = await this.geminiai.generateContent(this.SYMPTOM_CHECKER_QUERY(symptom));
+        const data = {
+            text: response.text(),
+        };
+        return {
+            success: true,
+            message: 'Symptoms generated',
             data,
         };
     }

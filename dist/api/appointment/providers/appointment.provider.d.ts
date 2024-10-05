@@ -89,4 +89,8 @@ export declare class AppointmentProvider {
         message: string;
     }>;
     appointmentReminder(): Promise<void>;
+    createMeetingLink(appointmentId: string, join_url: string): Promise<{
+        success: boolean;
+        message: string;
+    }>;
 }

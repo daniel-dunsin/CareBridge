@@ -9,6 +9,7 @@ export declare class AIService {
     private readonly fileService;
     constructor(openai: OpenAI, assemblyai: AssemblyAI, geminiai: GenerativeModel, fileService: FileService);
     private SUMMARIZER_QUERY;
+    private SYMPTOM_CHECKER_QUERY;
     transcribeCall(file: Express.Multer.File): Promise<{
         message: string;
         data: {
@@ -26,7 +27,14 @@ export declare class AIService {
         success: boolean;
         message: string;
         data: {
-            summary: string;
+            text: string;
+        };
+    }>;
+    checkSymptom(symptom: string): Promise<{
+        success: boolean;
+        message: string;
+        data: {
+            text: string;
         };
     }>;
 }

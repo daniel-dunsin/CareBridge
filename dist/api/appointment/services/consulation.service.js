@@ -44,7 +44,6 @@ let ConsultationService = class ConsultationService {
     }
     async getConsultations(filter) {
         const consulation = await this.populate(this._consultationModel.find(filter).sort({ createdAt: -1 }));
-        console.log(JSON.stringify(consulation[0]));
         return consulation;
     }
     async updateConsultation(filter, update, options) {

@@ -43,4 +43,10 @@ export class AIController {
       generateSummaryDto.transcriptionId,
     );
   }
+
+  @Post('check-symptoms')
+  @IsPublic()
+  async checkSymptoms(@Body('symptom') symptom: string) {
+    return await this.aiService.checkSymptom(symptom);
+  }
 }

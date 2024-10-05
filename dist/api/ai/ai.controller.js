@@ -30,6 +30,9 @@ let AIController = class AIController {
     async generateSummary(generateSummaryDto) {
         return await this.aiService.summarizeVideoCall(generateSummaryDto.transcriptionId);
     }
+    async checkSymptoms(symptom) {
+        return await this.aiService.checkSymptom(symptom);
+    }
 };
 exports.AIController = AIController;
 __decorate([
@@ -60,6 +63,14 @@ __decorate([
     __metadata("design:paramtypes", [dto_1.GenerateSummaryDto]),
     __metadata("design:returntype", Promise)
 ], AIController.prototype, "generateSummary", null);
+__decorate([
+    (0, common_1.Post)('check-symptoms'),
+    (0, auth_decorators_1.IsPublic)(),
+    __param(0, (0, common_1.Body)('symptom')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], AIController.prototype, "checkSymptoms", null);
 exports.AIController = AIController = __decorate([
     (0, common_1.Controller)('ai'),
     (0, swagger_1.ApiTags)('ai'),

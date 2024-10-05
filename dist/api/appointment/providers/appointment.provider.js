@@ -82,15 +82,8 @@ let AppointmentProvider = class AppointmentProvider {
         await this.validatePatientAndDocAvailaibility(bookSessionDto, doctor._id, patient._id, true);
         const amount = doctor.chargePerSession;
         const reference = `doctor-payment-${(0, uuid_1.v4)()}`;
-        let join_url = undefined;
-        if (bookSessionDto.mode == enums_1.AppointmentMode.ONLINE) {
-            const frontendUrl = this.configService.get('FRONTEND_URL');
-            const randomId = (0, uuid_1.v4)();
-            join_url = `${frontendUrl}/meet?room_id=${randomId}`;
-        }
         const appointment = {
             ...bookSessionDto,
-            join_url,
             department: doctor.department,
             doctor: doctor._id,
             patient: patient._id,
@@ -325,6 +318,21 @@ let AppointmentProvider = class AppointmentProvider {
                 });
             }));
         }
+    }
+    async createMeetingLink(appointmentId, join_url) {
+        const appointment = await this.appointmentService.getAppointment({
+            _id: new mongoose_1.Types.ObjectId(appointmentId),
+        });
+        if (!appointment)
+            throw new common_1.NotFoundException('Appointment not found');
+        if (!appointment.join_url) {
+            appointment.join_url = join_url;
+            await appointment.save();
+        }
+        return {
+            success: true,
+            message: 'meeting link generated successfully',
+        };
     }
 };
 exports.AppointmentProvider = AppointmentProvider;

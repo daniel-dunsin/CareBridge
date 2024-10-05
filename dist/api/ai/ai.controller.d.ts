@@ -14,7 +14,14 @@ export declare class AIController {
         success: boolean;
         message: string;
         data: {
-            summary: string;
+            text: string;
+        };
+    }>;
+    checkSymptoms(symptom: string): Promise<{
+        success: boolean;
+        message: string;
+        data: {
+            text: string;
         };
     }>;
 }

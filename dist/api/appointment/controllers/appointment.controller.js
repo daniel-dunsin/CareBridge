@@ -69,6 +69,10 @@ let AppointmentController = class AppointmentController {
         const data = await this.appointmentProvider.updateAppointmentStatus(updateStatusDto.status, appointmentId, user);
         return data;
     }
+    async generateMeetingLink(appointmentId, join_url) {
+        const data = await this.appointmentProvider.createMeetingLink(appointmentId, join_url);
+        return data;
+    }
 };
 exports.AppointmentController = AppointmentController;
 __decorate([
@@ -163,6 +167,15 @@ __decorate([
     __metadata("design:paramtypes", [update_appointment_dto_1.UpdateAppointmentStatusDto, String, Object]),
     __metadata("design:returntype", Promise)
 ], AppointmentController.prototype, "updateAppointmentStatus", null);
+__decorate([
+    (0, common_1.Put)('/:appointmentId/meeting-link'),
+    (0, auth_decorators_1.Roles)([enums_1.RoleNames.DOCTOR, enums_1.RoleNames.PATIENT]),
+    __param(0, (0, common_1.Param)('appointmentId')),
+    __param(1, (0, common_1.Body)('join_url')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:returntype", Promise)
+], AppointmentController.prototype, "generateMeetingLink", null);
 exports.AppointmentController = AppointmentController = __decorate([
     (0, common_1.Controller)('appointment'),
     (0, swagger_1.ApiTags)('appointment'),
