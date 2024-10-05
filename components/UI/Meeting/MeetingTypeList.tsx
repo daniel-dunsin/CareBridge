@@ -84,6 +84,8 @@ const MeetingTypeList = ({ full = true, extraFn, id, loading = false }: Props) =
         router.push(`/meeting/${call.id}`);
       }
 
+      console.log({ meetingLink });
+
       toastSuccess("Meeting created successfully");
     } catch (error) {
       console.log(error);

@@ -45,7 +45,7 @@ const Page = () => {
 
       <div className="mt-">
         {loading ? (
-          <div className="grid md:grid-cols-4 sm:grid-cols-2 gap-4">
+          <div className="grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-4">
             {Array.from({ length: 4 }).map((_, id) => (
               <div className="p-16 animate-skeleton bg-gray-400 rounded-lg" key={id}></div>
             ))}
@@ -55,6 +55,9 @@ const Page = () => {
             {data && data.length > 0 ? (
               <div className="grid grid-cols-4 gap-4">
                 {data
+                  .sort((d1, d2) =>
+                    new Date(d1.appointmentDate).getTime() > new Date(d2.appointmentDate).getTime() ? 1 : -1
+                  )
                   .sort((d1, d2) => new Date(d1.appointmentDate).getTime() - new Date(d2.appointmentDate).getTime())
                   .map(({ join_url: joinUrl, mode, _id, startTime, endTime }) => (
                     <div className="border rounded-md p-5 bg-white space-y-4" key={_id}>
