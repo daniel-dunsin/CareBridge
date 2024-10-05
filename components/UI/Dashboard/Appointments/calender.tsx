@@ -36,7 +36,7 @@ const BigCalendar = () => {
   const { user } = useUserInfo();
 
   const { data: appointments, refetch } = useQuery({
-    queryKey: ["getAppointments"],
+    queryKey: ["appointments"],
     queryFn: getAppointments,
   });
 
