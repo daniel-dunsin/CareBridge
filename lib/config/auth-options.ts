@@ -12,6 +12,7 @@ const refreshToken = async (tokens: ITokens) => {
     return data.data;
   } catch (err: any) {
     console.log(err?.response?.data || "An error occurred");
+    throw new Error("Unauthorized");
   }
 };
 
