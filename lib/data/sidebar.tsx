@@ -9,7 +9,7 @@ import { GiDoctorFace } from "react-icons/gi";
 import { LuUsers } from "react-icons/lu";
 import { FaShieldAlt } from "react-icons/fa";
 import { IoCart, IoCartOutline } from "react-icons/io5";
-import { FcVideoCall } from "react-icons/fc";
+import { BiHealth } from "react-icons/bi";
 
 type Link = {
   text: string;
@@ -35,12 +35,6 @@ const baseLinks: Link[] = [
     iconFilled: <FaUserDoctor />,
     text: "Appointments",
     path: "/appointments",
-  },
-  {
-    iconOutlined: <FcVideoCall />,
-    iconFilled: <FcVideoCall />,
-    text: "Meeting",
-    path: "/meeting",
   },
   {
     iconOutlined: <MdOutlineAnalytics />,
@@ -78,6 +72,12 @@ export const patientLinks: SidebarLink[] = [
         iconFilled: <MdOutlineCurrencyExchange />,
         text: "Billing Records",
         path: "/bills",
+      },
+      {
+        iconOutlined: <BiHealth />,
+        iconFilled: <BiHealth />,
+        text: "Symptom Checker",
+        path: "/symptom-checker",
       },
       // {
       //   iconOutlined: <MdOutlineReport />,

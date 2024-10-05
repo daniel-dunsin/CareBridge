@@ -1,11 +1,11 @@
-import { handleAxiosErrorWithToast } from "../config/axios-error";
-import { authApi } from "../config/axios-instance";
-import { toastSuccess } from "../utils/toast";
-import { ApiResponse, IPatient } from "../types";
+import { handleAxiosErrorWithToast } from '../config/axios-error';
+import { authApi } from '../config/axios-instance';
+import { toastSuccess } from '../utils/toast';
+import { ApiResponse, IPatient } from '../types';
 
 export const getPatient = async () => {
   try {
-    const { data } = await authApi.get<ApiResponse<IPatient>>("/patient/user");
+    const { data } = await authApi.get<ApiResponse<IPatient>>('/patient/user');
     return data.data;
   } catch (err) {
     // handleAxiosErrorWithToast(err);
@@ -14,9 +14,9 @@ export const getPatient = async () => {
 
 export const updatePatient = async (payload: Partial<IPatient>) => {
   try {
-    const { data } = await authApi.put<ApiResponse>("/patient", payload);
+    const { data } = await authApi.put<ApiResponse>('/patient', payload);
 
-    toastSuccess("Profile updated.");
+    toastSuccess('Profile updated.');
     return data.data;
   } catch (err) {
     handleAxiosErrorWithToast(err);
@@ -25,9 +25,24 @@ export const updatePatient = async (payload: Partial<IPatient>) => {
 
 export const verifyPayment = async (ref: string) => {
   try {
-    const { data } = await authApi.get<ApiResponse<{ status: "successful" | "pending" | "failed" }>>(
-      `/payment/confirm/${ref}`
-    );
+    const { data } = await authApi.get<
+      ApiResponse<{ status: 'successful' | 'pending' | 'failed' }>
+    >(`/payment/confirm/${ref}`);
     return data.data;
   } catch (err) {}
+};
+
+export const checkSymptoms = async (symptom: string) => {
+  try {
+    const { data } = await authApi.post<ApiResponse<{ text: string }>>(
+      '/ai/check-symptoms',
+      { symptom }
+    );
+
+    toastSuccess('Symptoms generated successfully');
+
+    return data.data;
+  } catch (error) {
+    handleAxiosErrorWithToast(error);
+  }
 };
