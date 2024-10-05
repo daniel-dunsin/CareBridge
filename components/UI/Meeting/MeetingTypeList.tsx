@@ -7,8 +7,24 @@ import HomeCard from "./HomeCard";
 import useUserInfo from "@/lib/hooks/useUserInfo";
 import MeetingModal from "./MeetingModal";
 import Button from "@/components/Common/Button";
+import { UseMutateFunction } from "@tanstack/react-query";
 
-const MeetingTypeList = ({ full = true }: { full?: boolean }) => {
+type Props = {
+  full?: boolean;
+  id?: string;
+  extraFn?: UseMutateFunction<
+    any,
+    Error,
+    {
+      appointmentId: string;
+      joinUrl: string;
+    },
+    unknown
+  >;
+  loading?: boolean;
+};
+
+const MeetingTypeList = ({ full = true, extraFn, id, loading = false }: Props) => {
   const router = useRouter();
   // const [meetingState, setMeetingState] = useState<
   //   "isScheduleMeeting" | "isJoiningMeeting" | "isInstantMeeting" | undefined
@@ -77,7 +93,11 @@ const MeetingTypeList = ({ full = true }: { full?: boolean }) => {
   const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${callDetails?.id}`;
 
   return (
-    <Button className={full ? `mt-20 container` : ""} onClick={createMeeting} disabled={starting}>
+    <Button
+      className={full ? `mt-20 container` : ""}
+      onClick={() => (extraFn ? extraFn({ joinUrl: meetingLink, appointmentId: id ?? "" }) : () => {}, createMeeting())}
+      disabled={starting || loading}
+    >
       {starting ? "Starting..." : "Start Meeting"}
     </Button>
   );

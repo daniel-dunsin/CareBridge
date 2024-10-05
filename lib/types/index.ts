@@ -148,6 +148,7 @@ export type Appointment = {
   department: Department;
   appointmentDate: Date;
   startTime: Date;
+  join_url?: string;
   endTime: Date;
   mode: "online" | "physical";
   status: "pending" | "successful" | "cancelled";

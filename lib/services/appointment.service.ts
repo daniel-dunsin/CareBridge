@@ -74,3 +74,23 @@ export const updateAppointmentStatus = async ({
     handleAxiosErrorWithToast(error);
   }
 };
+
+export const updateAppointmentJoinURL = async ({
+  appointmentId,
+  joinUrl,
+}: {
+  appointmentId: string;
+  joinUrl: string;
+}) => {
+  try {
+    const { data } = await authApi.put(`/appointment/${appointmentId}/meeting-link`, {
+      join_url: joinUrl,
+    });
+
+    toastSuccess("Appointment link updated, please join and wait for patient to join.");
+
+    return data;
+  } catch (error) {
+    handleAxiosErrorWithToast(error);
+  }
+};
