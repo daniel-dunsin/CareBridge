@@ -5,11 +5,11 @@ import { MdOutlineReport } from "react-icons/md";
 import { FaUserDoctor } from "react-icons/fa6";
 import { AiOutlineMedicineBox, AiFillMedicineBox } from "react-icons/ai";
 import { TbMedicineSyrup } from "react-icons/tb";
-import { GiDoctorFace } from "react-icons/gi";
 import { LuUsers } from "react-icons/lu";
 import { FaShieldAlt } from "react-icons/fa";
 import { IoCart, IoCartOutline } from "react-icons/io5";
 import { BiHealth } from "react-icons/bi";
+import { FcVideoCall } from "react-icons/fc";
 
 type Link = {
   text: string;
@@ -35,6 +35,12 @@ const baseLinks: Link[] = [
     iconFilled: <FaUserDoctor />,
     text: "Appointments",
     path: "/appointments",
+  },
+  {
+    iconOutlined: <FcVideoCall />,
+    iconFilled: <FcVideoCall />,
+    text: "Meeting",
+    path: "/meeting",
   },
   {
     iconOutlined: <MdOutlineAnalytics />,
